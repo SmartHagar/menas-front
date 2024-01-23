@@ -79,12 +79,12 @@ const Sidebar: FC<Props> = ({ type = "admin" }) => {
       </button>
 
       <aside
-        className={`fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 ${
+        className={`fixed top-0 left-0 z-40 w-64 bg-puskesmas bg-cover bg-center h-screen transition-transform -translate-x-full sm:translate-x-0 ${
           open ? "translate-x-0" : ""
         }`}
         aria-label="Sidebar"
       >
-        <div className="sidebar z-50 h-full px-3 pt-4 overflow-y-auto bg-primary text-color-2 flex flex-row-reverse justify-between sm:block">
+        <div className="sidebar z-50 h-full px-3 pt-4 overflow-y-auto bg-primary/[0.5] text-color-2 flex flex-row-reverse justify-between sm:block">
           <div
             className="text-black cursor-pointer sm:hidden"
             onClick={handleBurger}
@@ -92,15 +92,7 @@ const Sidebar: FC<Props> = ({ type = "admin" }) => {
             <BsXLg />
           </div>
           <div className="relative h-full sidebar w-full">
-            <div className="h-24 sidebar">
-              <Image
-                src="/images/uogp.png"
-                alt="logo"
-                width={70}
-                height={100}
-                className="mx-auto"
-              />
-            </div>
+            <div className="h-24 sidebar"></div>
             <ul className="space-y-2 font-medium w-full">
               {menus &&
                 menus.map((menu, index) => {

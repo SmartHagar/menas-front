@@ -13,7 +13,7 @@ type Props = {
   maxLength?: number;
   errors?: any;
   valueAsNumber?: boolean;
-  type?: string;
+  type?: "text" | "password" | "number" | "email" | "date" | "time" | "hidden";
   readOnly?: boolean;
   placeholder?: string;
   autoComplete?: string;

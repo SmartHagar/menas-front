@@ -7,7 +7,7 @@ import Image from "next/image";
 import ListMenu from "./ListMenu";
 import Link from "next/link";
 import { FC, useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import BtnDefault from "../button/BtnDefault";
 import Mobile from "./Mobile";
 
@@ -16,6 +16,7 @@ type Props = {};
 const NavbarComp: FC<Props> = ({}) => {
   const pathname = usePathname();
   console.log({ pathname });
+  const route = useRouter();
   // state
   const [open, setOpen] = useState(false);
   const [scrollY, setScrollY] = useState<number>(0);
@@ -48,6 +49,10 @@ const NavbarComp: FC<Props> = ({}) => {
       : pathname === "/"
       ? "z-50"
       : "md:z-10 z-50";
+
+  const handelClick = () => {
+    route.push("/login");
+  };
 
   return (
     <nav
@@ -84,7 +89,10 @@ const NavbarComp: FC<Props> = ({}) => {
           </div>
           <div className="flex items-center justify-center gap-x-14 z-50">
             <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-              <BtnDefault addClass="bg-secondary text-color-1">
+              <BtnDefault
+                addClass="bg-secondary text-color-1"
+                onClick={handelClick}
+              >
                 Login
               </BtnDefault>
               <button
