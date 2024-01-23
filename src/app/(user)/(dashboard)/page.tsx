@@ -8,8 +8,8 @@ type Props = {};
 const Dashboard = (props: Props) => {
   return (
     <div>
-      <div className="relative h-screen w-screen">
-        <div className="bg-puskesmas absolute inset-0 -top-44 bg-cover bg-top">
+      <div className="relative h-screen">
+        <div className="bg-puskesmas absolute inset-0 -top-28 md:-top-44 bg-cover bg-top">
           <div className="h-full w-full bg-black bg-opacity-50">
             <div className="flex flex-col justify-center items-center pb-44 h-full text-color-2">
               <h1 className="text-lg md:text-2xl font-bold">

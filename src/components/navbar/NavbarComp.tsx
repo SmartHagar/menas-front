@@ -43,7 +43,11 @@ const NavbarComp: FC<Props> = ({}) => {
   }, []);
 
   const backgroundClass =
-    scrollY >= 50 ? "bg-primary z-50" : pathname === "/" ? "z-50" : "z-10";
+    scrollY >= 50
+      ? "bg-primary z-50"
+      : pathname === "/"
+      ? "z-50"
+      : "md:z-10 z-50";
 
   return (
     <nav
@@ -64,7 +68,7 @@ const NavbarComp: FC<Props> = ({}) => {
           </a>
         </div>
 
-        <div className="md:relative pr-12">
+        <div className="md:relative md:pr-12">
           <div
             className={`absolute -top-10 -left-64 -right-12 -z-50 hidden md:block transition-opacity duration-500 ${
               scrollY >= 50 ? "md:opacity-0" : "md:opacity-100"
