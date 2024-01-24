@@ -19,6 +19,8 @@ type Props = {
   showModal: boolean;
   tgl_masuk: any;
   setTgl_masuk: any;
+  tgl_kadaluarsa: any;
+  setTgl_kadaluarsa: any;
 };
 
 const BodyForm: FC<Props> = ({
@@ -31,6 +33,8 @@ const BodyForm: FC<Props> = ({
   showModal,
   tgl_masuk,
   setTgl_masuk,
+  tgl_kadaluarsa,
+  setTgl_kadaluarsa,
 }) => {
   const { setObatAll, dtObat } = useObatApi();
   // memanggil data obat
@@ -55,7 +59,7 @@ const BodyForm: FC<Props> = ({
           control={control}
           required
           errors={errors.obat_id}
-          addClass="col-span-3"
+          addClass="col-span-4"
         />
       )}
       <InputTextDefault
@@ -65,7 +69,7 @@ const BodyForm: FC<Props> = ({
         required
         type="number"
         errors={errors.jumlah}
-        addClass="col-span-1"
+        addClass="col-span-4 lg:col-span-2"
       />
       <SelectDefault
         label="Layanan"
@@ -88,6 +92,16 @@ const BodyForm: FC<Props> = ({
         setStartDate={setTgl_masuk}
         required
         errors={errors.tgl_masuk}
+        addClass="col-span-4 lg:col-span-2"
+      />
+      <InputDate
+        label="Tgl. Kadaluarsa"
+        name="tgl_kadaluarsa"
+        control={control}
+        startDate={tgl_kadaluarsa}
+        setStartDate={setTgl_kadaluarsa}
+        required
+        errors={errors.tgl_kadaluarsa}
         addClass="col-span-4 lg:col-span-2"
       />
     </>

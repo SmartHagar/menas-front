@@ -20,6 +20,7 @@ type Inputs = {
   obat_id: number | string;
   jumlah: string | number;
   tgl_masuk: string | Date;
+  tgl_kadaluarsa: string | Date;
   layanan: string;
 };
 
@@ -28,6 +29,7 @@ const Form = ({ showModal, setShowModal, dtEdit }: Props) => {
   const { addData, updateData } = useObatMasuk();
   // state
   const [tgl_masuk, setTgl_masuk] = useState<string | Date>(new Date());
+  const [tgl_kadaluarsa, setTgl_kadaluarsa] = useState<string | Date>();
   // hook form
   const {
     register,
@@ -45,6 +47,8 @@ const Form = ({ showModal, setShowModal, dtEdit }: Props) => {
     setValue("jumlah", "");
     setValue("tgl_masuk", "");
     setTgl_masuk("");
+    setTgl_kadaluarsa("");
+    setValue("tgl_kadaluarsa", "");
     setValue("layanan", "");
   };
 
@@ -56,6 +60,8 @@ const Form = ({ showModal, setShowModal, dtEdit }: Props) => {
       setValue("jumlah", dtEdit.jumlah);
       setValue("tgl_masuk", dtEdit.tgl_masuk);
       setTgl_masuk(new Date(dtEdit.tgl_masuk));
+      setTgl_kadaluarsa(new Date(dtEdit.tgl_kadaluarsa));
+      setValue("tgl_kadaluarsa", dtEdit.tgl_kadaluarsa);
       setValue("layanan", dtEdit.layanan);
     } else {
       resetForm();
@@ -102,6 +108,8 @@ const Form = ({ showModal, setShowModal, dtEdit }: Props) => {
             showModal={showModal}
             tgl_masuk={tgl_masuk}
             setTgl_masuk={setTgl_masuk}
+            tgl_kadaluarsa={tgl_kadaluarsa}
+            setTgl_kadaluarsa={setTgl_kadaluarsa}
           />
         </div>
         <div>
