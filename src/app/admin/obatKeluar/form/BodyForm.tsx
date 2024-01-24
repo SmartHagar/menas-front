@@ -17,8 +17,8 @@ type Props = {
   watch: any;
   setValue: any;
   showModal: boolean;
-  tgl_masuk: any;
-  setTgl_masuk: any;
+  tgl_keluar: any;
+  setTgl_keluar: any;
 };
 
 const BodyForm: FC<Props> = ({
@@ -29,8 +29,8 @@ const BodyForm: FC<Props> = ({
   watch,
   setValue,
   showModal,
-  tgl_masuk,
-  setTgl_masuk,
+  tgl_keluar,
+  setTgl_keluar,
 }) => {
   const { setObatAll, dtObat } = useObatApi();
   // memanggil data obat
@@ -81,13 +81,13 @@ const BodyForm: FC<Props> = ({
         addClass="col-span-4 lg:col-span-2"
       />
       <InputDate
-        label="Tgl. Masuk"
-        name="tgl_masuk"
+        label="Tgl. Keluar"
+        name="tgl_keluar"
         control={control}
-        startDate={tgl_masuk}
-        setStartDate={setTgl_masuk}
+        startDate={tgl_keluar}
+        setStartDate={setTgl_keluar}
         required
-        errors={errors.tgl_masuk}
+        errors={errors.tgl_keluar}
         addClass="col-span-4 lg:col-span-2"
       />
     </>

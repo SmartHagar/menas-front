@@ -3,7 +3,7 @@
 import LoadingSpiner from "@/components/loading/LoadingSpiner";
 import PaginationDefault from "@/components/pagination/PaginationDefault";
 import TablesDefault from "@/components/tables/TablesDefault";
-import useObatMasuk from "@/stores/crud/ObatMasuk";
+import useObatKeluar from "@/stores/crud/ObatKeluar";
 import React, { FC, useEffect, useState } from "react";
 
 type DeleteProps = {
@@ -18,14 +18,14 @@ type Props = {
 };
 
 const ShowData: FC<Props> = ({ setDelete, setEdit, search }) => {
-  const { setObatMasuk, dtObatMasuk } = useObatMasuk();
+  const { setObatKeluar, dtObatKeluar } = useObatKeluar();
   // state
   const [page, setPage] = useState<number>(1);
   const [limit, setLimit] = useState<number>(10);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const fetchDataObatMasuk = async () => {
-    const res = await setObatMasuk({
+  const fetchDataObatKeluar = async () => {
+    const res = await setObatKeluar({
       page,
       limit,
       search,
@@ -33,7 +33,7 @@ const ShowData: FC<Props> = ({ setDelete, setEdit, search }) => {
     setIsLoading(false);
   };
   useEffect(() => {
-    fetchDataObatMasuk();
+    fetchDataObatKeluar();
 
     return () => {};
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -41,7 +41,7 @@ const ShowData: FC<Props> = ({ setDelete, setEdit, search }) => {
   // ketika search berubah
   useEffect(() => {
     setPage(1);
-    fetchDataObatMasuk();
+    fetchDataObatKeluar();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search]);
 
@@ -65,7 +65,7 @@ const ShowData: FC<Props> = ({ setDelete, setEdit, search }) => {
             <TablesDefault
               headTable={headTable}
               tableBodies={tableBodies}
-              dataTable={dtObatMasuk.data}
+              dataTable={dtObatKeluar.data}
               page={page}
               limit={limit}
               setEdit={setEdit}
@@ -74,11 +74,11 @@ const ShowData: FC<Props> = ({ setDelete, setEdit, search }) => {
               hapus={true}
             />
           </div>
-          {dtObatMasuk?.last_page > 1 && (
+          {dtObatKeluar?.last_page > 1 && (
             <div className="mt-4">
               <PaginationDefault
-                currentPage={dtObatMasuk?.current_page}
-                totalPages={dtObatMasuk?.last_page}
+                currentPage={dtObatKeluar?.current_page}
+                totalPages={dtObatKeluar?.last_page}
                 setPage={setPage}
               />
             </div>

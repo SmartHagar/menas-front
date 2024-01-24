@@ -6,7 +6,7 @@ import toastShow from "@/utils/toast-show";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import BodyForm from "./BodyForm";
-import useObatMasuk from "@/stores/crud/ObatMasuk";
+import useObatKeluar from "@/stores/crud/ObatKeluar";
 import BtnDefault from "@/components/button/BtnDefault";
 
 type Props = {
@@ -19,15 +19,15 @@ type Inputs = {
   id: number | string;
   obat_id: number | string;
   jumlah: string | number;
-  tgl_masuk: string | Date;
+  tgl_keluar: string | Date;
   layanan: string;
 };
 
 const Form = ({ showModal, setShowModal, dtEdit }: Props) => {
   // store
-  const { addData, updateData } = useObatMasuk();
+  const { addData, updateData } = useObatKeluar();
   // state
-  const [tgl_masuk, setTgl_masuk] = useState<string | Date>(new Date());
+  const [tgl_keluar, setTgl_keluar] = useState<string | Date>(new Date());
   // hook form
   const {
     register,
@@ -43,8 +43,8 @@ const Form = ({ showModal, setShowModal, dtEdit }: Props) => {
     setValue("id", "");
     setValue("obat_id", "");
     setValue("jumlah", "");
-    setValue("tgl_masuk", "");
-    setTgl_masuk("");
+    setValue("tgl_keluar", "");
+    setTgl_keluar("");
     setValue("layanan", "");
   };
 
@@ -54,8 +54,8 @@ const Form = ({ showModal, setShowModal, dtEdit }: Props) => {
       setValue("id", dtEdit.id);
       setValue("obat_id", dtEdit.obat_id);
       setValue("jumlah", dtEdit.jumlah);
-      setValue("tgl_masuk", dtEdit.tgl_masuk);
-      setTgl_masuk(new Date(dtEdit.tgl_masuk));
+      setValue("tgl_keluar", dtEdit.tgl_keluar);
+      setTgl_keluar(new Date(dtEdit.tgl_keluar));
       setValue("layanan", dtEdit.layanan);
     } else {
       resetForm();
@@ -84,7 +84,7 @@ const Form = ({ showModal, setShowModal, dtEdit }: Props) => {
 
   return (
     <ModalDefault
-      title="Form ObatMasuk"
+      title="Form ObatKeluar"
       showModal={showModal}
       setShowModal={setShowModal}
     >
@@ -100,8 +100,8 @@ const Form = ({ showModal, setShowModal, dtEdit }: Props) => {
             watch={watch}
             setValue={setValue}
             showModal={showModal}
-            tgl_masuk={tgl_masuk}
-            setTgl_masuk={setTgl_masuk}
+            tgl_keluar={tgl_keluar}
+            setTgl_keluar={setTgl_keluar}
           />
         </div>
         <div>

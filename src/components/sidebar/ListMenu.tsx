@@ -1,5 +1,14 @@
 /** @format */
-import { BsBandaid, BsHouseDoor, BsLamp, BsPeople } from "react-icons/bs";
+import {
+  BsAsterisk,
+  BsBandaid,
+  BsBasket,
+  BsBuildingAdd,
+  BsBuildingDash,
+  BsHouseDoor,
+  BsLamp,
+  BsPeople,
+} from "react-icons/bs";
 const createUrl = (path: string) => `/admin${path}`;
 const createUrlPegawai = (path: string) => `/pegawai${path}`;
 const ListMenu = [
@@ -12,36 +21,30 @@ const ListMenu = [
   {
     name: "Jenis",
     href: createUrl("/jenis"),
-    icon: <BsBandaid />,
+    icon: <BsBasket />,
   },
   {
     name: "Satuan",
     href: createUrl("/satuan"),
-    icon: <BsBandaid />,
+    icon: <BsAsterisk />,
   },
 
   {
     name: "Obat",
     href: createUrl("/obat"),
-    icon: <BsPeople />,
+    icon: <BsBandaid />,
   },
 
   {
     name: "Obat Masuk",
     href: createUrl("/obatMasuk"),
-    icon: <BsLamp />,
+    icon: <BsBuildingAdd />,
   },
 
   {
     name: "Obat Keluar",
     href: createUrl("/obatKeluar"),
-    icon: <BsHouseDoor />,
-  },
-
-  {
-    name: "Persediaan",
-    href: createUrl("/persediaan"),
-    icon: <BsHouseDoor />,
+    icon: <BsBuildingDash />,
   },
 ];
 
