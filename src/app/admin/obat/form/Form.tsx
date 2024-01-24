@@ -19,12 +19,11 @@ type Inputs = {
   id: number | string;
   jenis_id: string;
   nama: string;
-  satuan: string;
-  gambar: string;
+  satuan_id: string;
+  harga: number | string;
 };
 
 const Form = ({ showModal, setShowModal, dtEdit }: Props) => {
-  const [myFile, setMyFile] = useState<any>();
   // store
   const { addData, updateData } = useObat();
   // hook form
@@ -42,9 +41,8 @@ const Form = ({ showModal, setShowModal, dtEdit }: Props) => {
     setValue("id", "");
     setValue("jenis_id", "");
     setValue("nama", "");
-    setValue("satuan", "");
-    setValue("gambar", "");
-    setMyFile(null);
+    setValue("satuan_id", "");
+    setValue("harga", "");
   };
 
   // data edit
@@ -53,8 +51,8 @@ const Form = ({ showModal, setShowModal, dtEdit }: Props) => {
       setValue("id", dtEdit.id);
       setValue("jenis_id", dtEdit.jenis_id);
       setValue("nama", dtEdit.nama);
-      setValue("satuan", dtEdit.satuan);
-      setValue("gambar", dtEdit.gambar);
+      setValue("satuan_id", dtEdit.satuan_id);
+      setValue("harga", dtEdit.harga);
     } else {
       resetForm();
     }
@@ -63,6 +61,7 @@ const Form = ({ showModal, setShowModal, dtEdit }: Props) => {
   // simpan data
   const onSubmit: SubmitHandler<Inputs> = async (row) => {
     console.log({ row });
+    // return;
     // jika dtEdit tidak kosong maka update
     if (dtEdit) {
       const { data } = await updateData(dtEdit.id, row);
@@ -98,8 +97,6 @@ const Form = ({ showModal, setShowModal, dtEdit }: Props) => {
             watch={watch}
             setValue={setValue}
             showModal={showModal}
-            myFile={myFile}
-            setMyFile={setMyFile}
           />
         </div>
         <div>

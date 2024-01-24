@@ -5,7 +5,6 @@ import PaginationDefault from "@/components/pagination/PaginationDefault";
 import TablesDefault from "@/components/tables/TablesDefault";
 import useObat from "@/stores/crud/Obat";
 import React, { FC, useEffect, useState } from "react";
-import { BsFillInfoCircleFill } from "react-icons/bs";
 
 type DeleteProps = {
   id?: number | string;
@@ -48,8 +47,8 @@ const ShowData: FC<Props> = ({ setDelete, setEdit, search }) => {
   }, [search]);
 
   // table
-  const headTable = ["No", "Jenis Obat", "Nama", "Satuan", "Gambar", "Aksi"];
-  const tableBodies = ["jenis.nama", "nama", "satuan", "gambar"];
+  const headTable = ["No", "Jenis Obat", "Nama", "Satuan", "Harga", "Aksi"];
+  const tableBodies = ["jenis.nama", "nama", "satuan.nama", "harga"];
 
   return (
     <div className="flex-1 flex-col max-w-full h-full overflow-auto">

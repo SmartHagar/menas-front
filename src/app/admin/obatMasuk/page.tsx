@@ -8,7 +8,7 @@ import ModalDelete from "@/components/modal/ModalDelete";
 import useObatMasuk from "@/stores/crud/ObatMasuk";
 import { Toaster } from "react-hot-toast";
 import toastShow from "@/utils/toast-show";
-import InputTextSearch from "@/components/input/InputTextSerch";
+import InputTextSearch from "@/components/input/InputTextSearch";
 import BtnDefault from "@/components/button/BtnDefault";
 
 // type setDelete

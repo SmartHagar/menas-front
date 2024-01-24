@@ -4,6 +4,7 @@ import React from "react";
 import { BASE_URL } from "./baseURL";
 import Image from "next/image";
 import moment from "moment";
+import showRupiah from "./rupiah";
 
 const getProperty = (obj: any, prop: any) => {
   const angkatan = obj?.thn_angkatan?.substring(2);
@@ -31,6 +32,9 @@ const getProperty = (obj: any, prop: any) => {
           <Image src={`${BASE_URL}/${obj}`} width={100} height={100} alt="" />
         )
       );
+    }
+    if (prop === "harga") {
+      return showRupiah(obj);
     }
     if (prop === "file") {
       return (
