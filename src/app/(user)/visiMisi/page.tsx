@@ -8,8 +8,8 @@ const Tentang = (props: Props) => {
   return (
     <div className="flex flex-col gap-4 w-full max-w-screen-xl mx-auto">
       <div className="flex flex-col items-center">
-        <h1 className="text-3xl font-bold"> VISI DAN MISI</h1>
-        <h1 className="text-3xl font-bold"> PUSKESMAS HOM-HOM</h1>
+        <h1 className="text-3xl font-bold">VISI DAN MISI</h1>
+        <h1 className="text-3xl font-bold">PUSKESMAS HOM-HOM</h1>
       </div>
       <div className="mt-4">
         <h1 className="text-3xl font-bold text-center uppercase"> Visi</h1>

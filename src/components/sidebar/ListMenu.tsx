@@ -14,6 +14,11 @@ const ListMenu = [
     href: createUrl("/jenis"),
     icon: <BsBandaid />,
   },
+  {
+    name: "Satuan",
+    href: createUrl("/satuan"),
+    icon: <BsBandaid />,
+  },
 
   {
     name: "Obat",
