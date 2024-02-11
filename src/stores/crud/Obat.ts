@@ -12,12 +12,14 @@ type Props = {
   limit?: number;
   search?: string;
   tipe?: string;
+  sortby?: string;
+  order?: string;
 };
 
 type Store = {
   dtObat: any;
   showObat: any;
-  setObat: ({ page, limit, search, tipe }: Props) => Promise<{
+  setObat: ({ page, limit, search, sortby, order }: Props) => Promise<{
     status: string;
     data?: {};
     error?: {};
@@ -50,7 +52,7 @@ const useObat = create(
     },
     dtObat: [],
     showObat: [],
-    setObat: async ({ page = 1, limit = 10, search, tipe }) => {
+    setObat: async ({ page = 1, limit = 10, search, sortby, order }) => {
       try {
         const token = await useLogin.getState().setToken();
         const response = await crud({
@@ -61,7 +63,8 @@ const useObat = create(
             limit,
             page,
             search,
-            tipe,
+            sortby,
+            order,
           },
         });
         set((state) => ({ ...state, dtObat: response.data.data }));

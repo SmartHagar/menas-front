@@ -44,6 +44,7 @@ const InputRupiah: FC<Props> = ({
             <NumericFormat
               id={name}
               type="text"
+              autoComplete="off"
               thousandSeparator=","
               prefix={"Rp. "}
               value={field.value} // Menggunakan field.value sebagai nilai default

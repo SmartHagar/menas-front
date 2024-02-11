@@ -2,6 +2,9 @@
 
 import getProperty from "@/services/getProperty";
 import { useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
+
 import {
   BsFillEmojiSunglassesFill,
   BsFillPencilFill,
@@ -30,17 +33,44 @@ type Props = {
 
 const TablesDefault = (props: Props) => {
   const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const [clickCount, setClickCount] = useState<number>(0);
+
   const showNo = (index: number) => {
     let noUrut = (props.page - 1) * props.limit + index;
     return noUrut + 1;
   };
+  const sortby = searchParams.get("sortby");
+  const sortBy = (name: string) => {
+    // Jika nama yang diklik sama dengan nama sebelumnya, tambahkan 1 pada hitungan sebelumnya, jika tidak, mulai dari 1
+    const newCount = name === sortby ? clickCount + 1 : 1;
+    // Tentukan apakah urutan harus naik atau turun berdasarkan apakah hitungan ganjil atau genap
+    const sortOrder = newCount % 2 === 0 ? "desc" : "asc";
+    // Memperbarui query string dengan sortby baru
+    router.push(`?sortby=${name}&order=${sortOrder}`);
+    // Simpan jumlah klik yang baru
+    setClickCount(newCount);
+  };
+  useEffect(() => {
+    return sortBy(sortby || "");
+  }, []);
   return (
-    <table className="w-full border-collapse text-left">
+    <table className="w-full border-collapse text-left bg-white">
       <thead className="">
         <tr>
           {props.headTable &&
             props.headTable.map((row, index) => (
-              <th key={index} scope="col" className={`px-6 py-4`}>
+              <th
+                key={index}
+                scope="col"
+                className={`px-6 py-4 ${
+                  !(row === "Aksi" || row === "No") && "cursor-pointer"
+                }`}
+                onClick={() => {
+                  sortBy(props.tableBodies[index - 1]);
+                }}
+              >
                 {row}
               </th>
             ))}

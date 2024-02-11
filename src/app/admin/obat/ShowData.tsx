@@ -4,6 +4,7 @@ import LoadingSpiner from "@/components/loading/LoadingSpiner";
 import PaginationDefault from "@/components/pagination/PaginationDefault";
 import TablesDefault from "@/components/tables/TablesDefault";
 import useObat from "@/stores/crud/Obat";
+import { useSearchParams } from "next/navigation";
 import React, { FC, useEffect, useState } from "react";
 
 type DeleteProps = {
@@ -14,22 +15,27 @@ type DeleteProps = {
 type Props = {
   setDelete: ({ id, isDelete }: DeleteProps) => void;
   setEdit: (row: any) => void;
-  search: string;
 };
 
-const ShowData: FC<Props> = ({ setDelete, setEdit, search }) => {
+const ShowData: FC<Props> = ({ setDelete, setEdit }) => {
   const { setObat, dtObat, setShowObat, showObat } = useObat();
   // state
   const [page, setPage] = useState<number>(1);
   const [limit, setLimit] = useState<number>(10);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [showModal, setShowModal] = useState<boolean>(false);
+  // search params
+  const searchParams = useSearchParams();
 
+  const sortby = searchParams.get("sortby") || "";
+  const order = searchParams.get("order") || "";
+  const searchQuery = searchParams.get("search") || "";
   const fetchDataObat = async () => {
     const res = await setObat({
       page,
       limit,
-      search,
+      search: searchQuery,
+      sortby,
+      order,
     });
     setIsLoading(false);
   };
@@ -38,17 +44,17 @@ const ShowData: FC<Props> = ({ setDelete, setEdit, search }) => {
 
     return () => {};
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page, limit]);
+  }, [page, limit, searchParams]);
   // ketika search berubah
   useEffect(() => {
     setPage(1);
     fetchDataObat();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [search]);
+  }, [searchQuery, searchParams]);
 
   // table
   const headTable = ["No", "Jenis Obat", "Nama", "Satuan", "Harga", "Aksi"];
-  const tableBodies = ["jenis.nama", "nama", "satuan.nama", "harga"];
+  const tableBodies = ["jenis.nama", "nm_obat", "satuan.nama", "harga"];
 
   return (
     <div className="flex-1 flex-col max-w-full h-full overflow-auto">

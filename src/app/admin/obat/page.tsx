@@ -10,6 +10,7 @@ import { Toaster } from "react-hot-toast";
 import toastShow from "@/utils/toast-show";
 import InputTextSearch from "@/components/input/InputTextSearch";
 import BtnDefault from "@/components/button/BtnDefault";
+import { useRouter, useSearchParams } from "next/navigation";
 
 // type setDelete
 type Delete = {
@@ -25,7 +26,9 @@ const Obat = () => {
   const [showDelete, setShowDelete] = useState<boolean>(false);
   const [idDel, setIdDel] = useState<number | string>();
   const [dtEdit, setDtEdit] = useState<any>();
-  const [search, setSearch] = useState("");
+  // route
+  const route = useRouter();
+  const searchParams = useSearchParams();
 
   const handleTambah = () => {
     setShowModal(true);
@@ -48,6 +51,13 @@ const Obat = () => {
     } else setShowDelete(true);
   };
 
+  const handleSearch = (cari: string) => {
+    const sortby = searchParams.get("sortby") || "";
+    const order = searchParams.get("order") || "";
+
+    route.push(`?search=${cari}&sortby=${sortby}&order=${order}`);
+  };
+
   return (
     <div className="flex flex-col h-full">
       <div>
@@ -68,13 +78,10 @@ const Obat = () => {
             <BtnDefault onClick={handleTambah}>Tambah Data</BtnDefault>
           </div>
         </div>
-        <InputTextSearch
-          placeholder="Cari Obat"
-          onChange={(e) => setSearch(e)}
-        />
+        <InputTextSearch placeholder="Cari Obat" onChange={handleSearch} />
       </div>
 
-      <ShowData setDelete={setDelete} setEdit={setEdit} search={search} />
+      <ShowData setDelete={setDelete} setEdit={setEdit} />
     </div>
   );
 };

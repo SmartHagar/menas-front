@@ -18,7 +18,7 @@ type Props = {
 type Inputs = {
   id: number | string;
   jenis_id: string;
-  nama: string;
+  nm_obat: string;
   satuan_id: string;
   harga: number | string;
 };
@@ -40,7 +40,7 @@ const Form = ({ showModal, setShowModal, dtEdit }: Props) => {
   const resetForm = () => {
     setValue("id", "");
     setValue("jenis_id", "");
-    setValue("nama", "");
+    setValue("nm_obat", "");
     setValue("satuan_id", "");
     setValue("harga", "");
   };
@@ -50,7 +50,7 @@ const Form = ({ showModal, setShowModal, dtEdit }: Props) => {
     if (dtEdit) {
       setValue("id", dtEdit.id);
       setValue("jenis_id", dtEdit.jenis_id);
-      setValue("nama", dtEdit.nama);
+      setValue("nm_obat", dtEdit.nm_obat);
       setValue("satuan_id", dtEdit.satuan_id);
       setValue("harga", dtEdit.harga);
     } else {

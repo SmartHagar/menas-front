@@ -11,7 +11,7 @@ type Props = {
 
 const layout = (props: Props) => {
   return (
-    <div className="min-h-screen bg-white text-gray-800">
+    <div className="min-h-screen bg-white/[0.8] text-gray-800">
       <Auth />
       <div className="sm:flex ml-64 hidden h-12 items-center justify-center shadow-lg">
         <HeaderComp />

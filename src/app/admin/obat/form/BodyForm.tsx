@@ -49,11 +49,11 @@ const BodyForm: FC<Props> = ({
     <>
       <InputTextDefault
         label="Nama Obat"
-        name="nama"
+        name="nm_obat"
         register={register}
         required
         minLength={3}
-        errors={errors.nama}
+        errors={errors.nm_obat}
         addClass="col-span-4"
       />
       {dtJenis?.data && (

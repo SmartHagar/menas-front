@@ -31,6 +31,12 @@ const Tentang = (props: Props) => {
           </li>
         </ul>
       </div>
+      <div className="mt-4">
+        <h1 className="text-3xl font-bold text-center uppercase"> Moto</h1>
+        <p className="uppercase text-center text-2xl">
+          NIROK HIROK KESEHATAN HANORASUAK
+        </p>
+      </div>
     </div>
   );
 };

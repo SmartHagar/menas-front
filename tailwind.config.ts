@@ -30,6 +30,7 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
         puskesmas: "url('/images/puskesmas.jpg')",
+        "bg-1": "url('/images/bg-1.jpg')",
       },
     },
   },

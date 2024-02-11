@@ -55,7 +55,7 @@ const BodyForm: FC<Props> = ({
           placeholder="Pilih Obat"
           name="obat_id"
           dataDb={dtObat?.data}
-          body={["id", "nama"]}
+          body={["id", "nm_obat"]}
           control={control}
           required
           errors={errors.obat_id}
