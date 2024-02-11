@@ -6,6 +6,8 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import {
+  BsArrowDownShort,
+  BsArrowUpShort,
   BsFillEmojiSunglassesFill,
   BsFillPencilFill,
   BsFillTrashFill,
@@ -36,13 +38,19 @@ const TablesDefault = (props: Props) => {
   const searchParams = useSearchParams();
 
   const [clickCount, setClickCount] = useState<number>(0);
-
+  const [bodyTable, setBodyTable] = useState<string>();
+  const [order, setOrder] = useState<string>();
+  // membuat no urut
   const showNo = (index: number) => {
     let noUrut = (props.page - 1) * props.limit + index;
     return noUrut + 1;
   };
+  // mengambil parame
   const sortby = searchParams.get("sortby");
-  const sortBy = (name: string) => {
+  // mengambil urutan
+  const sortBy = (name: string, index?: number) => {
+    // simpan body table
+    setBodyTable(name);
     // Jika nama yang diklik sama dengan nama sebelumnya, tambahkan 1 pada hitungan sebelumnya, jika tidak, mulai dari 1
     const newCount = name === sortby ? clickCount + 1 : 1;
     // Tentukan apakah urutan harus naik atau turun berdasarkan apakah hitungan ganjil atau genap
@@ -51,6 +59,8 @@ const TablesDefault = (props: Props) => {
     router.push(`?sortby=${name}&order=${sortOrder}`);
     // Simpan jumlah klik yang baru
     setClickCount(newCount);
+    // simpan order
+    setOrder(sortOrder);
   };
   useEffect(() => {
     return sortBy(sortby || "");
@@ -60,20 +70,35 @@ const TablesDefault = (props: Props) => {
       <thead className="">
         <tr>
           {props.headTable &&
-            props.headTable.map((row, index) => (
-              <th
-                key={index}
-                scope="col"
-                className={`px-6 py-4 ${
-                  !(row === "Aksi" || row === "No") && "cursor-pointer"
-                }`}
-                onClick={() => {
-                  sortBy(props.tableBodies[index - 1]);
-                }}
-              >
-                {row}
-              </th>
-            ))}
+            props.headTable.map((row, index) => {
+              const body = props.tableBodies[index - 1];
+              return (
+                <th
+                  key={index}
+                  scope="col"
+                  className={`px-6 py-4 ${
+                    !(row === "Aksi" || row === "No") && "cursor-pointer"
+                  }`}
+                  onClick={() => {
+                    !(row === "Aksi" || row === "No") && sortBy(body, index);
+                  }}
+                >
+                  <div className="flex items-center gap-1">
+                    {row}
+                    {bodyTable === body && (
+                      <span className="flex">
+                        <BsArrowUpShort
+                          className={`${order === "desc" && "hidden"}`}
+                        />
+                        <BsArrowDownShort
+                          className={`${order === "asc" && "hidden"}`}
+                        />
+                      </span>
+                    )}
+                  </div>
+                </th>
+              );
+            })}
         </tr>
       </thead>
       <tbody className="divide-y divide-gray-100 border-t border-gray-100 ">
