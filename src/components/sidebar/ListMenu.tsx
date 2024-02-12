@@ -37,6 +37,12 @@ const ListMenu = [
   },
 
   {
+    name: "Petugas",
+    href: createUrl("/petugas"),
+    icon: <BsAsterisk />,
+  },
+
+  {
     name: "Obat",
     href: createUrl("/obat"),
     icon: <BsBandaid />,
