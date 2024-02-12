@@ -23,9 +23,16 @@ const ListMenu = [
     href: createUrl("/jenis"),
     icon: <BsBasket />,
   },
+
   {
     name: "Satuan",
     href: createUrl("/satuan"),
+    icon: <BsAsterisk />,
+  },
+
+  {
+    name: "Dokter",
+    href: createUrl("/dokter"),
     icon: <BsAsterisk />,
   },
 
