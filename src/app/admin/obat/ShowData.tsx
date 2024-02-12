@@ -23,6 +23,7 @@ const ShowData: FC<Props> = ({ setDelete, setEdit }) => {
   const [page, setPage] = useState<number>(1);
   const [limit, setLimit] = useState<number>(10);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [height, setHeight] = useState<number>(0);
   // search params
   const searchParams = useSearchParams();
 
@@ -57,11 +58,11 @@ const ShowData: FC<Props> = ({ setDelete, setEdit }) => {
   const tableBodies = ["jenis.nama", "nm_obat", "satuan.nama", "harga"];
 
   return (
-    <div className="flex-1 flex-col max-w-full h-full overflow-auto">
+    <div className="flex-1 flex-col max-w-full h-full grow overflow-auto">
       {isLoading ? (
         <LoadingSpiner />
       ) : (
-        <>
+        <div className="h-1/2">
           <div className="">
             <TablesDefault
               headTable={headTable}
@@ -84,7 +85,7 @@ const ShowData: FC<Props> = ({ setDelete, setEdit }) => {
               />
             </div>
           )}
-        </>
+        </div>
       )}
     </div>
   );

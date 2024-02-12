@@ -4,6 +4,7 @@ import LoadingSpiner from "@/components/loading/LoadingSpiner";
 import PaginationDefault from "@/components/pagination/PaginationDefault";
 import TablesDefault from "@/components/tables/TablesDefault";
 import useJenis from "@/stores/crud/Jenis";
+import { useSearchParams } from "next/navigation";
 import React, { FC, useEffect, useState } from "react";
 
 type DeleteProps = {
@@ -23,12 +24,18 @@ const ShowData: FC<Props> = ({ setDelete, setEdit, search }) => {
   const [page, setPage] = useState<number>(1);
   const [limit, setLimit] = useState<number>(10);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  // search params
+  const searchParams = useSearchParams();
+  const sortby = searchParams.get("sortby") || "";
+  const order = searchParams.get("order") || "";
 
   const fetchDataJenis = async () => {
     const res = await setJenis({
       page,
       limit,
       search,
+      sortby,
+      order,
     });
     setIsLoading(false);
   };
@@ -43,7 +50,7 @@ const ShowData: FC<Props> = ({ setDelete, setEdit, search }) => {
     setPage(1);
     fetchDataJenis();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [search]);
+  }, [search, sortby, order]);
 
   // table
   const headTable = ["No", "Nama Jenis", "Aksi"];

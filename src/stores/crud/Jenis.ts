@@ -9,11 +9,13 @@ type Props = {
   page?: number;
   limit?: number;
   search?: string;
+  sortby?: string;
+  order?: string;
 };
 
 type Store = {
   dtJenis: any;
-  setJenis: ({ page, limit, search }: Props) => Promise<{
+  setJenis: ({ page, limit, search, sortby, order }: Props) => Promise<{
     status: string;
     data?: {};
     error?: {};
@@ -36,7 +38,7 @@ type Store = {
 const useJenis = create(
   devtools<Store>((set, get) => ({
     dtJenis: [],
-    setJenis: async ({ page = 1, limit = 10, search }) => {
+    setJenis: async ({ page = 1, limit = 10, search, sortby, order }) => {
       try {
         const token = await useLogin.getState().setToken();
         const response = await crud({
@@ -47,6 +49,8 @@ const useJenis = create(
             limit,
             page,
             search,
+            sortby,
+            order,
           },
         });
         set((state) => ({ ...state, dtJenis: response.data.data }));
