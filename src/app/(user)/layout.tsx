@@ -8,7 +8,7 @@ type Props = {
 
 const layout = (props: Props) => {
   return (
-    <div className="bg-white min-h-screen w-screen flex flex-col justify-between">
+    <div className="bg-white/[0.8] min-h-screen w-screen flex flex-col justify-between">
       <div className="md:h-28 h-20">
         <NavbarComp />
       </div>

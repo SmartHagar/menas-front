@@ -1,4 +1,5 @@
 /** @format */
+import MenuTypes from "@/types/MenuTypes";
 import {
   BsAsterisk,
   BsBandaid,
@@ -11,7 +12,7 @@ import {
 } from "react-icons/bs";
 const createUrl = (path: string) => `/admin${path}`;
 const createUrlPegawai = (path: string) => `/pegawai${path}`;
-const ListMenu = [
+const ListMenu: MenuTypes[] = [
   {
     name: "Home",
     href: createUrl(""),
@@ -44,24 +45,28 @@ const ListMenu = [
 
   {
     name: "Obat",
-    href: createUrl("/obat"),
     icon: <BsBandaid />,
-  },
+    slug: "obat",
+    subMenus: [
+      {
+        name: "Daftar Obat",
+        href: createUrl("/obat/daftar"),
+      },
 
-  {
-    name: "Obat Masuk",
-    href: createUrl("/obatMasuk"),
-    icon: <BsBuildingAdd />,
-  },
+      {
+        name: "Obat Masuk",
+        href: createUrl("/obat/masuk"),
+      },
 
-  {
-    name: "Obat Keluar",
-    href: createUrl("/obatKeluar"),
-    icon: <BsBuildingDash />,
+      {
+        name: "Obat Keluar",
+        href: createUrl("/obat/keluar"),
+      },
+    ],
   },
 ];
 
-const pegawaiMenu = [
+const pegawaiMenu: MenuTypes[] = [
   {
     name: "Home",
     href: createUrlPegawai("/"),

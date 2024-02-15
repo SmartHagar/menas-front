@@ -2,7 +2,7 @@
 
 interface MenuTypes {
   name: string;
-  href: string;
+  href?: string;
   icon?: JSX.Element;
   slug?: string;
   subMenus?: MenuTypes[];

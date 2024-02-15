@@ -10,6 +10,7 @@ import useLogout from "@/stores/auth/logout";
 import MenuTypes from "@/types/MenuTypes";
 import Cookies from "js-cookie";
 import Image from "next/image";
+import SubMenu from "./SubMenu";
 
 type Props = {
   type?: "admin" | "kapus";
@@ -20,6 +21,7 @@ const Sidebar: FC<Props> = ({ type = "admin" }) => {
   const pathname = usePathname();
   const route = useRouter();
   const [menus, setMenus] = useState<MenuTypes[]>([]);
+  const [openMenus, setOpenMenus] = useState<string[]>([]);
   // store
   const { setLogout } = useLogout();
 
@@ -43,6 +45,30 @@ const Sidebar: FC<Props> = ({ type = "admin" }) => {
     setOpen(!open);
   };
 
+  // submenu
+  const findOpenMenus = (menuList: MenuTypes[]) => {
+    for (const menu of menuList) {
+      // console.log({ slug, menu });
+      if (menu?.href === pathname) {
+        const second = pathname?.split("/");
+        // if second.length > 0 remove index 0
+        second.splice(0, 1);
+        setOpenMenus(second);
+      }
+      // console.log({ menu });
+      if (menu.subMenus) {
+        // console.log({ menu });
+        findOpenMenus(menu.subMenus);
+      }
+    }
+  };
+
+  useEffect(() => {
+    menus && findOpenMenus(menus);
+    return () => {};
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [menus, pathname]);
+
   const handleLogout = async () => {
     const res = await setLogout();
     if (res?.status === "success") {
@@ -54,7 +80,6 @@ const Sidebar: FC<Props> = ({ type = "admin" }) => {
     }
   };
 
-  console.log({ pathname });
   return (
     <div className="sidebar">
       <div className="absolute top-0">
@@ -99,16 +124,28 @@ const Sidebar: FC<Props> = ({ type = "admin" }) => {
               {menus &&
                 menus.map((menu, index) => {
                   const isActive = pathname === menu.href;
-                  return (
+                  const subMenus = menu?.subMenus;
+                  const { name, icon, slug } = menu;
+                  return subMenus ? (
+                    SubMenu({
+                      subMenus,
+                      name,
+                      icon,
+                      slug,
+                      index,
+                      pathname,
+                      openMenus,
+                    })
+                  ) : (
                     <li key={index}>
                       <Link
-                        href={menu.href}
+                        href={menu.href || "#"}
                         className={`flex w-full items-center p-2 text-color-2 hover:bg-menu-active transition-all duration-500 rounded-lg group ${
                           isActive && "bg-menu-active"
                         }`}
                       >
-                        {menu.icon}
-                        <span className="ms-3">{menu.name}</span>
+                        {icon}
+                        <span className="ms-3">{name}</span>
                       </Link>
                     </li>
                   );

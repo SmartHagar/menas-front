@@ -6,7 +6,7 @@ import useJenisApi from "@/stores/api/Jenis";
 import React, { FC, useEffect } from "react";
 
 import "react-datepicker/dist/react-datepicker.css";
-import useSatuanApi from "../../../../stores/api/Satuan";
+import useSatuanApi from "../../../../../stores/api/Satuan";
 import InputRupiah from "@/components/input/InputRupiah";
 
 type Props = {
