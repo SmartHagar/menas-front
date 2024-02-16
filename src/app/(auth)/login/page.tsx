@@ -2,6 +2,7 @@
 
 import React from "react";
 import Form from "./Form";
+import Link from "next/link";
 
 type Props = {};
 
@@ -13,7 +14,7 @@ const Login = (props: Props) => {
         <div className="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
           <Form />
         </div>
-        <div className="py-5">
+        <Link href="/" className="py-5">
           <div className="grid grid-cols-2 gap-1">
             <div className="text-center sm:text-left whitespace-nowrap">
               <button className="transition duration-200 mx-5 px-5 py-4 cursor-pointer font-normal text-sm rounded-lg text-gray-500 hover:bg-gray-200 focus:outline-none focus:bg-gray-300 focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 ring-inset">
@@ -37,7 +38,7 @@ const Login = (props: Props) => {
               </button>
             </div>
           </div>
-        </div>
+        </Link>
       </div>
     </div>
   );

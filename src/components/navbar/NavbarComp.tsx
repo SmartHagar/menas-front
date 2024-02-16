@@ -10,6 +10,7 @@ import { FC, useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import BtnDefault from "../button/BtnDefault";
 import Mobile from "./Mobile";
+import LoadingSpiner from "../loading/LoadingSpiner";
 
 type Props = {};
 
@@ -20,6 +21,7 @@ const NavbarComp: FC<Props> = ({}) => {
   // state
   const [open, setOpen] = useState(false);
   const [scrollY, setScrollY] = useState<number>(0);
+  const [loadLogin, setLoadLogin] = useState(false);
 
   const handleBurger = () => {
     setOpen(!open);
@@ -51,7 +53,11 @@ const NavbarComp: FC<Props> = ({}) => {
       : "md:z-10 z-50";
 
   const handelClick = () => {
+    setLoadLogin(true);
     route.push("/login");
+    setTimeout(() => {
+      setLoadLogin(false);
+    }, 2000);
   };
 
   return (
@@ -89,12 +95,16 @@ const NavbarComp: FC<Props> = ({}) => {
           </div>
           <div className="flex items-center justify-center gap-x-14 z-50">
             <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-              <BtnDefault
-                addClass="bg-secondary text-color-1"
-                onClick={handelClick}
-              >
-                Login
-              </BtnDefault>
+              {loadLogin ? (
+                <LoadingSpiner />
+              ) : (
+                <BtnDefault
+                  addClass="bg-secondary text-color-1"
+                  onClick={handelClick}
+                >
+                  Login
+                </BtnDefault>
+              )}
               <button
                 data-collapse-toggle="navbar-sticky"
                 type="button"

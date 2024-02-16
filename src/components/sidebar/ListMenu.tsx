@@ -11,7 +11,7 @@ import {
   BsPeople,
 } from "react-icons/bs";
 const createUrl = (path: string) => `/admin${path}`;
-const createUrlPegawai = (path: string) => `/pegawai${path}`;
+const createUrlPetugas = (path: string) => `/petugas${path}`;
 const ListMenu: MenuTypes[] = [
   {
     name: "Home",
@@ -59,26 +59,26 @@ const ListMenu: MenuTypes[] = [
       },
 
       {
-        name: "Obat Keluar",
-        href: createUrl("/obat/keluar"),
+        name: "Stok Obat",
+        href: createUrl("/obat/persediaan"),
       },
     ],
   },
 ];
 
-const pegawaiMenu: MenuTypes[] = [
+const petugasMenu: MenuTypes[] = [
   {
     name: "Home",
-    href: createUrlPegawai("/"),
+    href: createUrlPetugas("/"),
     icon: <BsHouseDoor />,
   },
   {
     name: "Jawaban",
-    href: createUrlPegawai("/jawaban"),
+    href: createUrlPetugas("/jawaban"),
     icon: <BsPeople />,
   },
 ];
 
 export default ListMenu;
 
-export { pegawaiMenu };
+export { petugasMenu };

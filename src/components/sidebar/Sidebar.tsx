@@ -1,7 +1,7 @@
 /** @format */
 "use client";
 import React, { FC, useEffect, useState } from "react";
-import ListMenu, { pegawaiMenu } from "./ListMenu";
+import ListMenu, { petugasMenu } from "./ListMenu";
 import Link from "next/link";
 import { BsXLg } from "react-icons/bs";
 import { usePathname, useRouter } from "next/navigation";
@@ -11,9 +11,10 @@ import MenuTypes from "@/types/MenuTypes";
 import Cookies from "js-cookie";
 import Image from "next/image";
 import SubMenu from "./SubMenu";
+import LoadingSpiner from "../loading/LoadingSpiner";
 
 type Props = {
-  type?: "admin" | "kapus";
+  type?: "admin" | "petugas" | "kepala gudang";
 };
 
 const Sidebar: FC<Props> = ({ type = "admin" }) => {
@@ -22,6 +23,7 @@ const Sidebar: FC<Props> = ({ type = "admin" }) => {
   const route = useRouter();
   const [menus, setMenus] = useState<MenuTypes[]>([]);
   const [openMenus, setOpenMenus] = useState<string[]>([]);
+  const [loadLogout, setLoadLogout] = useState(false);
   // store
   const { setLogout } = useLogout();
 
@@ -35,8 +37,8 @@ const Sidebar: FC<Props> = ({ type = "admin" }) => {
   useEffect(() => {
     if (type === "admin") {
       setMenus(ListMenu);
-    } else {
-      setMenus(pegawaiMenu);
+    } else if (type === "petugas") {
+      setMenus(petugasMenu);
     }
     return () => {};
   }, [type]);
@@ -70,12 +72,13 @@ const Sidebar: FC<Props> = ({ type = "admin" }) => {
   }, [menus, pathname]);
 
   const handleLogout = async () => {
+    setLoadLogout(true);
     const res = await setLogout();
     if (res?.status === "success") {
       // delete cookie
       Cookies.remove("token");
       Cookies.remove("role");
-      Cookies.remove("pegawai");
+      Cookies.remove("petugas");
       return route.push("/login");
     }
   };
@@ -151,14 +154,18 @@ const Sidebar: FC<Props> = ({ type = "admin" }) => {
                   );
                 })}
             </ul>
-            <div className="absolute bottom-4 flex justify-center left-0 right-0">
-              <BtnDefault
-                addClass="bg-secondary text-color-1"
-                onClick={handleLogout}
-              >
-                Logout
-              </BtnDefault>
-            </div>
+            {loadLogout ? (
+              <LoadingSpiner />
+            ) : (
+              <div className="absolute bottom-4 flex justify-center left-0 right-0">
+                <BtnDefault
+                  addClass="bg-secondary text-color-1"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </BtnDefault>
+              </div>
+            )}
           </div>
         </div>
       </aside>
