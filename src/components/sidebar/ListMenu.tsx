@@ -73,8 +73,8 @@ const petugasMenu: MenuTypes[] = [
     icon: <BsHouseDoor />,
   },
   {
-    name: "Jawaban",
-    href: createUrlPetugas("/jawaban"),
+    name: "Pasien",
+    href: createUrlPetugas("/pasien"),
     icon: <BsPeople />,
   },
 ];

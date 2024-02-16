@@ -29,7 +29,7 @@ const InputRadio: FC<Props> = ({
           id={id.toString()}
           name={name}
           {...register(name, { required })}
-          className={`form-radio h-6 w-4 text-primary`}
+          className={`form-radio h-4 w-4 text-primary`}
           defaultChecked={defaultChecked}
         />
         <label htmlFor={id.toString()}>{value}</label>

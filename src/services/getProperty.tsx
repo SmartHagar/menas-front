@@ -23,7 +23,11 @@ const getProperty = (obj: any, prop: any) => {
     if (typeof obj === "object") {
       return obj ? obj[last] : "";
     }
-    if (prop === "tgl_masuk" || prop === "tgl_kadaluarsa" || prop === "tgl") {
+    if (
+      prop === "tgl_masuk" ||
+      prop === "tgl_kadaluarsa" ||
+      prop === "tgl_lahir"
+    ) {
       return moment(obj).format("DD/MM/YYYY");
     }
     if (prop === "gambar" || prop === "foto") {
