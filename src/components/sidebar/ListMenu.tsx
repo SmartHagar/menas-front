@@ -77,6 +77,11 @@ const petugasMenu: MenuTypes[] = [
     href: createUrlPetugas("/pasien"),
     icon: <BsPeople />,
   },
+  {
+    name: "Resep",
+    href: createUrlPetugas("/resep"),
+    icon: <BsPeople />,
+  },
 ];
 
 export default ListMenu;

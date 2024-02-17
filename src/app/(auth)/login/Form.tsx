@@ -60,6 +60,8 @@ const Form = (props: Props) => {
       const { data } = res;
       Cookies.set("token", data.token);
       Cookies.set("role", data.role);
+      const petugas = JSON.stringify(data.petugas);
+      Cookies.set("petugas", petugas);
       // cek jika data pagawai ada
       if (data?.pegawai) {
         // convert json

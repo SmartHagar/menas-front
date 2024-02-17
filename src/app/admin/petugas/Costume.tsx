@@ -4,7 +4,9 @@ import ModalDefault from "@/components/modal/ModalDefault";
 import React, { useState } from "react";
 import { BsFillInfoCircleFill } from "react-icons/bs";
 
-type Props = {};
+type Props = {
+  data: any;
+};
 
 const Costume = (props: Props) => {
   const [showModal, setShowModal] = useState<boolean>(false);
@@ -23,7 +25,7 @@ const Costume = (props: Props) => {
         <div>Email: {dtPetugas?.user?.email}</div>
         <div>Password: {dtPetugas?.user?.show_password}</div>
       </ModalDefault>
-      <div onClick={() => handelInfo(props)} className="cursor-pointer">
+      <div onClick={() => handelInfo(props.data)} className="cursor-pointer">
         <BsFillInfoCircleFill />
       </div>
     </>

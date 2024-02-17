@@ -6,6 +6,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import InputRadio from "@/components/input/InputRadio";
 import InputDateMinMax from "@/components/input/InputDateMinMax";
 import {
+  addMonths,
+  addYears,
   differenceInDays,
   differenceInMonths,
   differenceInYears,
@@ -44,8 +46,11 @@ const BodyForm: FC<Props> = ({
 
     // Perbedaan umur dalam tahun, bulan, dan hari
     const umurTahun = differenceInYears(today, tglDate);
-    const umurBulan = differenceInMonths(today, tglDate) % 12; // Sisa bulan setelah tahun dihitung
-    const umurHari = differenceInDays(today, tglDate);
+    const umurBulan = differenceInMonths(today, addYears(tglDate, umurTahun));
+    const umurHari = differenceInDays(
+      today,
+      addMonths(addYears(tglDate, umurTahun), umurBulan)
+    );
 
     console.log({ umurTahun, umurBulan, umurHari });
 

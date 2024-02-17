@@ -12,6 +12,7 @@ import Cookies from "js-cookie";
 import Image from "next/image";
 import SubMenu from "./SubMenu";
 import LoadingSpiner from "../loading/LoadingSpiner";
+import handleLogout from "@/app/(auth)/logout/logout";
 
 type Props = {
   type?: "admin" | "petugas" | "kepala gudang";
@@ -70,18 +71,6 @@ const Sidebar: FC<Props> = ({ type = "admin" }) => {
     return () => {};
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [menus, pathname]);
-
-  const handleLogout = async () => {
-    setLoadLogout(true);
-    const res = await setLogout();
-    if (res?.status === "success") {
-      // delete cookie
-      Cookies.remove("token");
-      Cookies.remove("role");
-      Cookies.remove("petugas");
-      return route.push("/login");
-    }
-  };
 
   return (
     <div className="sidebar">
@@ -160,7 +149,9 @@ const Sidebar: FC<Props> = ({ type = "admin" }) => {
               <div className="absolute bottom-4 flex justify-center left-0 right-0">
                 <BtnDefault
                   addClass="bg-secondary text-color-1"
-                  onClick={handleLogout}
+                  onClick={() =>
+                    handleLogout({ setLogout, setLoadLogout, route })
+                  }
                 >
                   Logout
                 </BtnDefault>

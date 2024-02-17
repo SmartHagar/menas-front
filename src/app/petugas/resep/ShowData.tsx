@@ -3,10 +3,9 @@
 import LoadingSpiner from "@/components/loading/LoadingSpiner";
 import PaginationDefault from "@/components/pagination/PaginationDefault";
 import TablesDefault from "@/components/tables/TablesDefault";
-import usePetugas from "@/stores/crud/Petugas";
+import useResep from "@/stores/crud/Resep";
 import { useSearchParams } from "next/navigation";
 import React, { FC, useEffect, useState } from "react";
-import Costume from "./Costume";
 
 type DeleteProps = {
   id?: number | string;
@@ -16,80 +15,85 @@ type DeleteProps = {
 type Props = {
   setDelete: ({ id, isDelete }: DeleteProps) => void;
   setEdit: (row: any) => void;
-  search: string;
 };
 
-const ShowData: FC<Props> = ({ setDelete, setEdit, search }) => {
-  const { setPetugas, dtPetugas } = usePetugas();
+const ShowData: FC<Props> = ({ setDelete, setEdit }) => {
+  const { setResep, dtResep } = useResep();
   // state
   const [page, setPage] = useState<number>(1);
   const [limit, setLimit] = useState<number>(10);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [height, setHeight] = useState<number>(0);
   // search params
   const searchParams = useSearchParams();
+
   const sortby = searchParams.get("sortby") || "";
   const order = searchParams.get("order") || "";
-
-  const fetchDataPetugas = async () => {
-    const res = await setPetugas({
+  const searchQuery = searchParams.get("search") || "";
+  const fetchDataResep = async () => {
+    const res = await setResep({
       page,
       limit,
-      search,
+      search: searchQuery,
       sortby,
       order,
     });
     setIsLoading(false);
   };
   useEffect(() => {
-    fetchDataPetugas();
+    fetchDataResep();
 
     return () => {};
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page, limit]);
+  }, [page, limit, searchParams]);
   // ketika search berubah
   useEffect(() => {
     setPage(1);
-    fetchDataPetugas();
+    fetchDataResep();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [search, sortby, order]);
+  }, [searchQuery, searchParams]);
 
   // table
-  const headTable = ["No", "Nama Petugas", "Jabatan", "Aksi"];
-  const tableBodies = ["nm_petugas", "jabatan"];
-  const costume = (data: any) => {
-    return <Costume data={data} />;
-  };
+  const headTable = [
+    "No",
+    "Nama Resep",
+    "Tgl. Lahir",
+    "Jenkel",
+    "No. HP",
+    "Alamat",
+    "Aksi",
+  ];
+  const tableBodies = ["nm_resep", "tgl_lahir", "jenkel", "no_hp", "alamat"];
 
   return (
-    <div className="flex-1 flex-col max-w-full h-full overflow-auto">
+    <div className="flex-1 flex-col max-w-full h-full grow overflow-auto">
       {isLoading ? (
         <LoadingSpiner />
       ) : (
-        <>
+        <div className="h-1/2">
           <div className="">
             <TablesDefault
               headTable={headTable}
               tableBodies={tableBodies}
-              dataTable={dtPetugas.data}
+              dataTable={dtResep.data}
               page={page}
               limit={limit}
               setEdit={setEdit}
               setDelete={setDelete}
               ubah={true}
               hapus={true}
-              costume={costume}
             />
           </div>
-          {dtPetugas?.last_page > 1 && (
+          {dtResep?.last_page > 1 && (
             <div className="mt-4">
               <PaginationDefault
-                currentPage={dtPetugas?.current_page}
-                totalPages={dtPetugas?.last_page}
+                currentPage={dtResep?.current_page}
+                totalPages={dtResep?.last_page}
                 setPage={setPage}
               />
             </div>
           )}
-        </>
+        </div>
       )}
     </div>
   );
