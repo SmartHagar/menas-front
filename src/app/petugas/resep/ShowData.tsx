@@ -6,6 +6,9 @@ import TablesDefault from "@/components/tables/TablesDefault";
 import useResep from "@/stores/crud/Resep";
 import { useSearchParams } from "next/navigation";
 import React, { FC, useEffect, useState } from "react";
+import CetakResep from "./CetakResep";
+import { BsInfoCircle, BsInfoCircleFill, BsPrinterFill } from "react-icons/bs";
+import ModalDefault from "@/components/modal/ModalDefault";
 
 type DeleteProps = {
   id?: number | string;
@@ -23,7 +26,8 @@ const ShowData: FC<Props> = ({ setDelete, setEdit }) => {
   const [page, setPage] = useState<number>(1);
   const [limit, setLimit] = useState<number>(10);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [height, setHeight] = useState<number>(0);
+  const [showModalCetak, setShowModalCetak] = useState<boolean>(false);
+  const [row, setRow] = useState<any>();
   // search params
   const searchParams = useSearchParams();
 
@@ -73,8 +77,29 @@ const ShowData: FC<Props> = ({ setDelete, setEdit }) => {
     "petugas.nm_petugas",
   ];
 
+  const costume = (row: any) => {
+    return (
+      <BsInfoCircleFill
+        className="cursor-pointer select-none"
+        onClick={() => handlePrint(row)}
+      />
+    );
+  };
+
+  const handlePrint = (row: any) => {
+    setShowModalCetak(true);
+    setRow(row);
+  };
+
   return (
     <div className="flex-1 flex-col max-w-full h-full grow overflow-auto">
+      <ModalDefault
+        title={`Resep ${row?.pasien.nm_pasien}`}
+        showModal={showModalCetak}
+        setShowModal={setShowModalCetak}
+      >
+        <CetakResep data={row} />
+      </ModalDefault>
       {isLoading ? (
         <LoadingSpiner />
       ) : (
@@ -90,6 +115,7 @@ const ShowData: FC<Props> = ({ setDelete, setEdit }) => {
               setDelete={setDelete}
               ubah={true}
               hapus={true}
+              costume={costume}
             />
           </div>
           {dtResep?.last_page > 1 && (

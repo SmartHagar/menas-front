@@ -1,3 +1,5 @@
+/** @format */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -24,4 +26,20 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+}
+
+@media print {
+  html,
+  body {
+    height: initial !important;
+    overflow: initial !important;
+  }
+
+  .print-agreement {
+    margin: 10px 20px;
+  }
+
+  .hidden {
+    display: flex !important;
+  }
 }
