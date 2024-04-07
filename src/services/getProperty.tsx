@@ -26,6 +26,7 @@ const getProperty = (obj: any, prop: any) => {
     if (
       prop === "tgl_masuk" ||
       prop === "tgl_kadaluarsa" ||
+      prop === "tgl_resep" ||
       prop === "tgl_lahir"
     ) {
       return moment(obj).format("DD/MM/YYYY");
@@ -40,6 +41,7 @@ const getProperty = (obj: any, prop: any) => {
     if (prop === "harga") {
       return showRupiah(obj);
     }
+
     if (prop === "file") {
       return (
         obj && (

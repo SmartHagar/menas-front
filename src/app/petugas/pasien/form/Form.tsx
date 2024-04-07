@@ -45,6 +45,7 @@ const Form = ({ showModal, setShowModal, dtEdit }: Props) => {
     setValue("nm_pasien", "");
     setValue("jenkel", "");
     setValue("tgl_lahir", "");
+    setTgl_lahir("");
     setValue("no_hp", "");
     setValue("alamat", "");
   };
@@ -108,7 +109,9 @@ const Form = ({ showModal, setShowModal, dtEdit }: Props) => {
           />
         </div>
         <div>
-          <BtnDefault onClick={handleSubmit(onSubmit)}>Simpan</BtnDefault>
+          <BtnDefault type="submit" onClick={handleSubmit(onSubmit)}>
+            Simpan
+          </BtnDefault>
         </div>
       </form>
     </ModalDefault>

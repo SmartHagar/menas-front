@@ -11,13 +11,13 @@ type Props = {
 
 const layout = (props: Props) => {
   return (
-    <div className="min-h-screen bg-white text-gray-800">
+    <div className="min-h-screen bg-white/60 text-gray-800">
       <Auth />
       <div className="sm:flex ml-64 hidden border-b border-menu-active h-12 items-center justify-center">
         <HeaderComp />
       </div>
       <Sidebar type="petugas" />
-      <div className="p-4 sm:ml-64">{props.children}</div>
+      <div className="p-4 sm:ml-64 pt-10 md:pt-4">{props.children}</div>
     </div>
   );
 };

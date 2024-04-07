@@ -108,7 +108,7 @@ const NavbarComp: FC<Props> = ({}) => {
               <button
                 data-collapse-toggle="navbar-sticky"
                 type="button"
-                className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
+                className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg xl:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
                 aria-controls="navbar-sticky"
                 aria-expanded="false"
                 onClick={handleBurger}
@@ -131,7 +131,7 @@ const NavbarComp: FC<Props> = ({}) => {
                 </svg>
               </button>
             </div>
-            <div className="items-center justify-between hidden w-full overflow-auto lg:max-w-[80%] md:max-w-[500px] md:flex md:w-auto md:order-1">
+            <div className="items-center justify-between hidden w-full overflow-auto lg:max-w-[80%] md:max-w-[500px] xl:flex md:w-auto md:order-1">
               <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg md:space-x-2 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
                 {ListMenu &&
                   ListMenu.map((item, index) => {
@@ -154,7 +154,7 @@ const NavbarComp: FC<Props> = ({}) => {
           </div>
         </div>
       </div>
-      <div className={`md:hidden z-50`}>
+      <div className={`xl:hidden z-50`}>
         <Mobile open={open} />
       </div>
     </nav>

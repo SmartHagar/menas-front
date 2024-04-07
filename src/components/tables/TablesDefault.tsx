@@ -31,6 +31,7 @@ type Props = {
   hapus: boolean;
   pekerjaan?: boolean;
   costume?: any;
+  sort?: boolean;
 };
 
 const TablesDefault = (props: Props) => {
@@ -63,7 +64,7 @@ const TablesDefault = (props: Props) => {
     setOrder(sortOrder);
   };
   useEffect(() => {
-    return sortBy(sortby || "");
+    sortby && sortBy(sortby);
   }, []);
   return (
     <table className="w-full border-collapse text-left bg-white">
@@ -80,7 +81,9 @@ const TablesDefault = (props: Props) => {
                     !(row === "Aksi" || row === "No") && "cursor-pointer"
                   }`}
                   onClick={() => {
-                    !(row === "Aksi" || row === "No") && sortBy(body, index);
+                    !(row === "Aksi" || row === "No") &&
+                      sortby &&
+                      sortBy(body, index);
                   }}
                 >
                   <div className="flex items-center gap-1">
@@ -121,7 +124,7 @@ const TablesDefault = (props: Props) => {
                 <td className="px-6 py-4 rounded-r-xl">
                   <div className="flex flex-row gap-2">
                     {/*  */}
-                    {props.costume && props.costume(row)}
+                    {props.costume && props.costume(row, index)}
                     {props.ubah && (
                       <BsFillPencilFill
                         onClick={() => props.setEdit && props?.setEdit(row)}

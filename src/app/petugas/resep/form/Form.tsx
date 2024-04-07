@@ -9,34 +9,41 @@ import BodyForm from "./BodyForm";
 import useResep from "@/stores/crud/Resep";
 import BtnDefault from "@/components/button/BtnDefault";
 import Cookies from "js-cookie";
+import Obat from "./Obat";
+import { useRouter } from "next/navigation";
+import ObatKeluar from "./ObatKeluar";
 
 type Props = {
-  showModal: boolean;
-  setShowModal: (data: boolean) => void;
   dtEdit: any;
 };
 
 type Inputs = {
   id: number | string;
-  nm_resep: string;
-  jenkel: string;
+  petugas_id: number | string;
+  kode_resep: string;
+  pasien_id: number | string;
   tgl_resep: string | Date;
-  no_hp: number | string;
-  alamat: number | string;
+  dokter_id: number | string;
+  diagnosa: string;
+  obat: { obat_masuk_id: number | string; jumlah: number | string }[];
+  cek: any;
 };
 
-const Form = ({ showModal, setShowModal, dtEdit }: Props) => {
+const Form = ({ dtEdit }: Props) => {
   // store
   const { addData, updateData } = useResep();
   // state
-  const [tgl_resep, setTgl_resep] = useState<string | Date>("");
+  const [tgl_resep, setTgl_resep] = useState<string | Date>(new Date());
   const [petugas, setPetugas] = useState<any>({});
+  const [obatCek, setObatCek] = useState<any>([]);
+  // router
+  const router = useRouter();
   // get petugas form cookie
   useEffect(() => {
     const dtPetugas = JSON.parse(Cookies.get("petugas") || "{}");
     setPetugas(dtPetugas);
     return () => {};
-  }, [showModal]);
+  }, []);
 
   // hook form
   const {
@@ -46,35 +53,58 @@ const Form = ({ showModal, setShowModal, dtEdit }: Props) => {
     control,
     formState: { errors },
     watch,
+    reset,
   } = useForm<Inputs>();
 
+  const nowDate = `${new Date().getFullYear()}-${new Date().getMonth()}-${new Date().getDate()}`;
   // reset form
   const resetForm = () => {
     setValue("id", "");
-    setValue("nm_resep", "");
-    setValue("jenkel", "");
-    setValue("tgl_resep", "");
-    setValue("no_hp", "");
-    setValue("alamat", "");
+    setValue("kode_resep", "");
+    setValue("pasien_id", "");
+    setValue("tgl_resep", nowDate);
+    setValue("dokter_id", "");
+    setValue("diagnosa", "");
   };
-
   // data edit
   useEffect(() => {
     if (dtEdit) {
       setValue("id", dtEdit.id);
-      setValue("nm_resep", dtEdit.nm_resep);
-      setValue("jenkel", dtEdit.jenkel);
+      setValue("kode_resep", dtEdit.kode_resep);
+      setValue("pasien_id", dtEdit.pasien_id);
       setValue("tgl_resep", dtEdit.tgl_resep);
-      setTgl_resep(new Date(dtEdit.tgl_resep));
-      setValue("no_hp", dtEdit.no_hp);
-      setValue("alamat", dtEdit.alamat);
+      setTgl_resep(dtEdit.tgl_resep && new Date(dtEdit.tgl_resep));
+      setValue("dokter_id", dtEdit.dokter_id);
+      setValue("diagnosa", dtEdit.diagnosa);
+      const obat =
+        dtEdit?.obat_keluar &&
+        dtEdit.obat_keluar.map((item: any) => {
+          const keluar = item.jumlah;
+          const masuk = item.obat_masuk;
+          // add keluar to masuk
+          return {
+            ...masuk,
+            keluar,
+          };
+        });
+      setObatCek(obat);
     } else {
       resetForm();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [showModal, dtEdit]);
+  }, [dtEdit]);
   // simpan data
   const onSubmit: SubmitHandler<Inputs> = async (row) => {
+    // add petugas_id in row
+    row.petugas_id = petugas.id;
+    // remove cek from row
+    delete row.cek;
+
+    row.obat = row.obat.filter((item: any) =>
+      obatCek.some(
+        (obat: any) => parseInt(obat.id) === parseInt(item.obat_masuk_id)
+      )
+    );
     console.log({ row });
     // return;
     // jika dtEdit tidak kosong maka update
@@ -83,23 +113,20 @@ const Form = ({ showModal, setShowModal, dtEdit }: Props) => {
       toastShow({
         event: data,
       });
-      setShowModal(false);
     } else {
       const { data } = await addData(row);
       console.log({ data });
       toastShow({
         event: data,
       });
-      data?.type !== "success" ? null : resetForm();
     }
+    router.push("/petugas/resep");
   };
 
+  console.log({ obatCek });
+
   return (
-    <ModalDefault
-      title={`Resep - ${petugas.nm_petugas}`}
-      showModal={showModal}
-      setShowModal={setShowModal}
-    >
+    <>
       <form onSubmit={handleSubmit(onSubmit)}>
         <InputTextDefault name="id" register={register} type="hidden" />
 
@@ -111,16 +138,49 @@ const Form = ({ showModal, setShowModal, dtEdit }: Props) => {
             control={control}
             watch={watch}
             setValue={setValue}
-            showModal={showModal}
             tgl_resep={tgl_resep}
             setTgl_resep={setTgl_resep}
           />
         </div>
         <div>
-          <BtnDefault onClick={handleSubmit(onSubmit)}>Simpan</BtnDefault>
+          <Obat
+            register={register}
+            watch={watch}
+            obatCek={obatCek}
+            setObatCek={setObatCek}
+          />
         </div>
+        {obatCek && obatCek.length > 0 ? (
+          <div className="my-4 bg-white p-4">
+            <h2 className="text-xl my-2">Informasi Obat Keluar</h2>
+            <hr />
+            <table className="w-full border-collapse text-left bg-white mt-4">
+              <thead className="">
+                <tr>
+                  <th>Nama Obat</th>
+                  <th>Jumlah</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-100 border-t border-gray-100 ">
+                <ObatKeluar
+                  errors={errors}
+                  register={register}
+                  obatCek={obatCek}
+                  setValue={setValue}
+                />
+              </tbody>
+            </table>
+            <div>
+              <BtnDefault type="submit" onClick={handleSubmit(onSubmit)}>
+                Simpan
+              </BtnDefault>
+            </div>
+          </div>
+        ) : (
+          <p>Belum ada obat dipilih</p>
+        )}
       </form>
-    </ModalDefault>
+    </>
   );
 };
 

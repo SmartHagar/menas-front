@@ -96,13 +96,8 @@ const useResep = create(
           },
           data: row,
         });
-        set((prevState) => ({
-          dtResep: {
-            last_page: prevState.dtResep.last_page,
-            current_page: prevState.dtResep.current_page,
-            data: [res.data.data, ...prevState.dtResep.data],
-          },
-        }));
+        // call setResep
+        get().setResep({});
         return {
           status: "berhasil tambah",
           data: res.data,
@@ -149,22 +144,8 @@ const useResep = create(
           headers: { Authorization: `Bearer ${token}` },
           data: row,
         });
-        set((prevState) => ({
-          dtResep: {
-            last_page: prevState.dtResep.last_page,
-            current_page: prevState.dtResep.current_page,
-            data: prevState.dtResep.data.map((item: any) => {
-              if (item.id === id) {
-                return {
-                  ...item,
-                  ...response.data.data,
-                };
-              } else {
-                return item;
-              }
-            }),
-          },
-        }));
+        // call setResep
+        get().setResep({});
         return {
           status: "berhasil update",
           data: response.data,

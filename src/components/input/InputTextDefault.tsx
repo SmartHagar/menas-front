@@ -19,6 +19,10 @@ type Props = {
   autoComplete?: string;
   addClass?: string;
   value?: string | number;
+  defaultValue?: string | number;
+  max?: number;
+  min?: number;
+  step?: number;
 };
 
 const InputTextDefault: FC<Props> = ({
@@ -36,6 +40,10 @@ const InputTextDefault: FC<Props> = ({
   autoComplete = "on",
   addClass,
   value,
+  defaultValue,
+  max,
+  min,
+  step,
 }) => {
   return (
     <div className={addClass}>
@@ -59,8 +67,12 @@ const InputTextDefault: FC<Props> = ({
             minLength,
             maxLength,
             valueAsNumber,
+            max,
+            min,
+            step,
           })}
-          defaultValue={value}
+          defaultValue={defaultValue}
+          value={value}
         />
       </div>
       {/* jika type password */}
@@ -82,6 +94,16 @@ const InputTextDefault: FC<Props> = ({
       {errors?.type === "pattern" && (
         <p className="text-red-500 font-inter italic text-sm">
           {label} hanya boleh angka.
+        </p>
+      )}
+      {errors?.type === "max" && (
+        <p className="text-red-500 font-inter italic text-sm">
+          {label} tidak boleh lebih dari {max}.
+        </p>
+      )}
+      {errors?.type === "min" && (
+        <p className="text-red-500 font-inter italic text-sm">
+          {label} tidak boleh kurang dari {min}.
         </p>
       )}
     </div>

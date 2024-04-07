@@ -56,14 +56,22 @@ const ShowData: FC<Props> = ({ setDelete, setEdit }) => {
   // table
   const headTable = [
     "No",
-    "Nama Resep",
-    "Tgl. Lahir",
-    "Jenkel",
-    "No. HP",
-    "Alamat",
+    "Kode",
+    "Tgl. Resep",
+    "Dokter",
+    "Pasien",
+    "Diagnosa",
+    "Petugas",
     "Aksi",
   ];
-  const tableBodies = ["nm_resep", "tgl_lahir", "jenkel", "no_hp", "alamat"];
+  const tableBodies = [
+    "kode_resep",
+    "tgl_resep",
+    "dokter.nm_dokter",
+    "pasien.nm_pasien",
+    "diagnosa",
+    "petugas.nm_petugas",
+  ];
 
   return (
     <div className="flex-1 flex-col max-w-full h-full grow overflow-auto">

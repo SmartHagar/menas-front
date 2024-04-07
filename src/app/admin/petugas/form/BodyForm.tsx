@@ -44,7 +44,7 @@ const BodyForm: FC<Props> = ({
         name="jabatan"
         options={[
           { value: "Penanggung Jawab", label: "Penanggung Jawab" },
-          { value: "Asistem Opotik", label: "Asistem Opotik" },
+          { value: "Asisten Opotik", label: "Asisten Opotik" },
         ]}
         addClass="col-span-4 lg:col-span-2"
       />

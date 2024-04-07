@@ -16,7 +16,6 @@ type Props = {
   control: any;
   watch: any;
   setValue: any;
-  showModal: boolean;
   tgl_resep: any;
   setTgl_resep: any;
 };
@@ -28,7 +27,6 @@ const BodyForm: FC<Props> = ({
   dtEdit,
   watch,
   setValue,
-  showModal,
   tgl_resep,
   setTgl_resep,
 }) => {
@@ -48,7 +46,7 @@ const BodyForm: FC<Props> = ({
   useEffect(() => {
     fetchDataOption({});
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [showModal]);
+  }, []);
   return (
     <>
       <InputTextDefault
@@ -58,21 +56,19 @@ const BodyForm: FC<Props> = ({
         required
         minLength={3}
         errors={errors.kode_resep}
-        addClass="col-span-4"
+        addClass="col-span-4 lg:col-span-2"
       />
 
-      <div className="flex col-span-4 items-center gap-2">
-        <InputDate
-          label="Tgl. Resep"
-          name="tgl_resep"
-          control={control}
-          startDate={tgl_resep}
-          setStartDate={setTgl_resep}
-          required
-          errors={errors.tgl_resep}
-          addClass="col-span-4 lg:col-span-2"
-        />
-      </div>
+      <InputDate
+        label="Tgl. Resep"
+        name="tgl_resep"
+        control={control}
+        startDate={tgl_resep}
+        setStartDate={setTgl_resep}
+        required
+        errors={errors.tgl_resep}
+        addClass="col-span-4 lg:col-span-2"
+      />
 
       {dtDokter?.data && (
         <SelectFromDb

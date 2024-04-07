@@ -57,7 +57,11 @@ const BodyForm: FC<Props> = ({
     setUmur(`${umurTahun} Thn, ${umurBulan} Bln, ${umurHari} Hri`);
   };
   useEffect(() => {
-    tglLahir && hitungUmur(tglLahir);
+    if (tglLahir) {
+      hitungUmur(tglLahir);
+    } else {
+      setUmur("");
+    }
 
     return () => {};
   }, [tglLahir]);
