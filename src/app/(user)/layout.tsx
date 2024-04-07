@@ -1,4 +1,5 @@
 /** @format */
+import FooterComp from "@/components/footer/FooterComp";
 import NavbarComp from "@/components/navbar/NavbarComp";
 import React from "react";
 
@@ -15,7 +16,7 @@ const layout = (props: Props) => {
       <div className="flex flex-col grow h-full w-full pt-5 md:z-10 z-20">
         {props.children}
       </div>
-      <footer className="mt-4">ini adalah footer</footer>
+      <FooterComp />
     </div>
   );
 };

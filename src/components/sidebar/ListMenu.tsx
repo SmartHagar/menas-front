@@ -15,7 +15,7 @@ const createUrlPetugas = (path: string) => `/petugas${path}`;
 const ListMenu: MenuTypes[] = [
   {
     name: "Home",
-    href: createUrl("/"),
+    href: createUrl(""),
     icon: <BsHouseDoor />,
   },
 
@@ -56,11 +56,6 @@ const ListMenu: MenuTypes[] = [
       {
         name: "Obat Masuk",
         href: createUrl("/obat/masuk"),
-      },
-
-      {
-        name: "Stok Obat",
-        href: createUrl("/obat/persediaan"),
       },
     ],
   },
