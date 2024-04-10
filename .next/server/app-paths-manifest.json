@@ -1,0 +1,20 @@
+{
+  "/_not-found": "app/_not-found.js",
+  "/(auth)/login/page": "app/(auth)/login/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/(user)/(dashboard)/page": "app/(user)/(dashboard)/page.js",
+  "/(user)/visiMisi/page": "app/(user)/visiMisi/page.js",
+  "/admin/(dashboard)/page": "app/admin/(dashboard)/page.js",
+  "/petugas/(dashboard)/page": "app/petugas/(dashboard)/page.js",
+  "/admin/jenis/page": "app/admin/jenis/page.js",
+  "/admin/dokter/page": "app/admin/dokter/page.js",
+  "/admin/obat/daftar/page": "app/admin/obat/daftar/page.js",
+  "/admin/obat/keluar/page": "app/admin/obat/keluar/page.js",
+  "/admin/obat/masuk/page": "app/admin/obat/masuk/page.js",
+  "/admin/petugas/page": "app/admin/petugas/page.js",
+  "/admin/obat/persediaan/page": "app/admin/obat/persediaan/page.js",
+  "/admin/satuan/page": "app/admin/satuan/page.js",
+  "/petugas/pasien/page": "app/petugas/pasien/page.js",
+  "/petugas/resep/form/page": "app/petugas/resep/form/page.js",
+  "/petugas/resep/page": "app/petugas/resep/page.js"
+}
