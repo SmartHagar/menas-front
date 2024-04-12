@@ -6,9 +6,9 @@ import LoadingSpiner from "@/components/loading/LoadingSpiner";
 import PaginationDefault from "@/components/pagination/PaginationDefault";
 import TablesDefault from "@/components/tables/TablesDefault";
 import useObatMasuk from "@/stores/crud/ObatMasuk";
+import hitungStok from "@/utils/HitungStokObat";
 import { useRouter, useSearchParams } from "next/navigation";
-import React, { FC, useEffect, useState } from "react";
-import { hitungStok } from "./lainnya";
+import React, { FC, useCallback, useEffect, useState } from "react";
 
 type Props = {
   register: any;
@@ -25,8 +25,9 @@ const Obat: FC<Props> = ({ register, watch, setObatCek, obatCek }) => {
   const [limit, setLimit] = useState<number>(10);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [dtObat, setDtObat] = useState<any>([]);
+  const [search, setSearch] = useState("");
   // route
-  const route = useRouter();
+  const router = useRouter();
   // search params
   const searchParams = useSearchParams();
 
@@ -72,13 +73,26 @@ const Obat: FC<Props> = ({ register, watch, setObatCek, obatCek }) => {
     "tgl_kadaluarsa",
     "totalStok",
   ];
-  //   pencarian
-  const handleSearch = (cari: string) => {
-    const sortby = searchParams.get("sortby") || "";
-    const order = searchParams.get("order") || "";
+  const getSearch = searchParams.get("search") || "";
+  // pertama kali render
+  useEffect(() => {
+    setSearch(getSearch);
 
-    route.push(`?search=${cari}&sortby=${sortby}&order=${order}`);
-  };
+    return () => {};
+  }, [getSearch]);
+
+  const handleSearch = useCallback(
+    (cari: string) => {
+      router.push(`?search=${cari}&sortby=${sortby}&order=${order}`);
+    },
+    [router, sortby, order]
+  );
+  // effect ketika search berubah
+  useEffect(() => {
+    handleSearch(search);
+
+    return () => {};
+  }, [handleSearch, search]);
 
   const handleChange = (e: any) => {
     const target = e.target.value;
@@ -127,6 +141,8 @@ const Obat: FC<Props> = ({ register, watch, setObatCek, obatCek }) => {
               placeholder="Cari Obat"
               onChange={handleSearch}
               addClass="mt-4 mx-2"
+              search={search}
+              setSearch={setSearch}
             />
           </div>
           <div className="">

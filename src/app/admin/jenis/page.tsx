@@ -71,6 +71,8 @@ const Jenis = () => {
         <InputTextSearch
           placeholder="Cari Jenis"
           onChange={(e) => setSearch(e)}
+          search={search}
+          setSearch={setSearch}
         />
       </div>
 

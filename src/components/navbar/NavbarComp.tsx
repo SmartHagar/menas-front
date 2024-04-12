@@ -50,7 +50,7 @@ const NavbarComp: FC<Props> = ({}) => {
       ? "bg-primary z-50"
       : pathname === "/"
       ? "z-50"
-      : "md:z-10 z-50";
+      : "lg:z-10 z-50";
 
   const handelClick = () => {
     setLoadLogin(true);

@@ -71,6 +71,8 @@ const Dokter = () => {
         <InputTextSearch
           placeholder="Cari Dokter"
           onChange={(e) => setSearch(e)}
+          search={search}
+          setSearch={setSearch}
         />
       </div>
 

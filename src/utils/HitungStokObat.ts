@@ -21,4 +21,4 @@ const hitungStok = (data: any) => {
   return obatMasuk;
 };
 
-export { hitungStok };
+export default hitungStok;

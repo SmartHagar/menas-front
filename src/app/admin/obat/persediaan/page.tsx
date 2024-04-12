@@ -30,6 +30,8 @@ const ObatMasuk = () => {
         <InputTextSearch
           placeholder="Cari ObatMasuk"
           onChange={(e) => setSearch(e)}
+          search={search}
+          setSearch={setSearch}
         />
       </div>
 

@@ -1,6 +1,6 @@
 /** @format */
 "use client";
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import ShowData from "./ShowData";
 import Form from "./form/Form";
@@ -26,9 +26,10 @@ const Pasien = () => {
   const [showDelete, setShowDelete] = useState<boolean>(false);
   const [idDel, setIdDel] = useState<number | string>();
   const [dtEdit, setDtEdit] = useState<any>();
+  const [search, setSearch] = useState("");
+
   // route
-  const route = useRouter();
-  const searchParams = useSearchParams();
+  const router = useRouter();
 
   const handleTambah = () => {
     setShowModal(true);
@@ -51,12 +52,30 @@ const Pasien = () => {
     } else setShowDelete(true);
   };
 
-  const handleSearch = (cari: string) => {
-    const sortby = searchParams.get("sortby") || "";
-    const order = searchParams.get("order") || "";
+  // search params
+  const searchParams = useSearchParams();
+  const sortby = searchParams.get("sortby") || "";
+  const order = searchParams.get("order") || "";
+  const getSearch = searchParams.get("search") || "";
+  // pertama kali render
+  useEffect(() => {
+    setSearch(getSearch);
 
-    route.push(`?search=${cari}&sortby=${sortby}&order=${order}`);
-  };
+    return () => {};
+  }, [getSearch]);
+
+  const handleSearch = useCallback(
+    (cari: string) => {
+      router.push(`?search=${cari}&sortby=${sortby}&order=${order}`);
+    },
+    [router, sortby, order]
+  );
+  // effect ketika search berubah
+  useEffect(() => {
+    handleSearch(search);
+
+    return () => {};
+  }, [handleSearch, search]);
 
   return (
     <div className="flex flex-col h-full w-full">
@@ -78,7 +97,12 @@ const Pasien = () => {
             <BtnDefault onClick={handleTambah}>Tambah Data</BtnDefault>
           </div>
         </div>
-        <InputTextSearch placeholder="Cari Pasien" onChange={handleSearch} />
+        <InputTextSearch
+          placeholder="Cari Pasien"
+          onChange={handleSearch}
+          search={search}
+          setSearch={setSearch}
+        />
       </div>
 
       <ShowData setDelete={setDelete} setEdit={setEdit} />

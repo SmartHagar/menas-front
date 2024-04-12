@@ -13,7 +13,7 @@ const layout = (props: Props) => {
       <div className="md:h-28 h-20">
         <NavbarComp />
       </div>
-      <div className="flex flex-col grow h-full w-full pt-5 md:z-10 z-20">
+      <div className="flex flex-col grow h-full w-full pt-5 lg:z-10 z-20">
         {props.children}
       </div>
       <FooterComp />

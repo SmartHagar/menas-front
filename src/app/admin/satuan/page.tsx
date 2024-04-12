@@ -71,6 +71,8 @@ const Satuan = () => {
         <InputTextSearch
           placeholder="Cari Satuan"
           onChange={(e) => setSearch(e)}
+          search={search}
+          setSearch={setSearch}
         />
       </div>
 
