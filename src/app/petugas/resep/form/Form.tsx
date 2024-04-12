@@ -123,8 +123,6 @@ const Form = ({ dtEdit }: Props) => {
     router.push("/petugas/resep");
   };
 
-  console.log({ obatCek });
-
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
