@@ -1,6 +1,6 @@
 /** @format */
 
-import React from "react";
+import Image from "next/image";
 
 type Props = {};
 
@@ -11,6 +11,13 @@ const Tentang = (props: Props) => {
         <h2 className="text-2xl font-bold">STRUKTUR ORGANISASI</h2>
         <h2 className="text-2xl font-bold">PUSKESMAS HOM-HOM</h2>
       </div>
+      <Image
+        src="/images/Menas-Struktur-Organisasi.png"
+        alt="struktur"
+        width={300}
+        height={300}
+        className="mx-auto"
+      />
     </div>
   );
 };
