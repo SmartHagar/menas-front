@@ -1,12 +1,11 @@
 /** @format */
 
-import React from "react";
 import { BASE_URL } from "./baseURL";
 import Image from "next/image";
 import moment from "moment";
 import showRupiah from "./rupiah";
 
-const getProperty = (obj: any, prop: any) => {
+const getProperty = (obj: any, prop: any, index: number, setIndexBox: any) => {
   const angkatan = obj?.thn_angkatan?.substring(2);
   const mhs_angkatan = obj?.mhs?.thn_angkatan?.substring(2);
   let parts = prop.split(".");
@@ -31,10 +30,18 @@ const getProperty = (obj: any, prop: any) => {
     ) {
       return moment(obj).format("DD/MM/YYYY");
     }
-    if (prop === "gambar" || prop === "foto") {
+    if (prop === "gambar" || prop === "foto" || prop === "picture") {
       return (
         obj && (
-          <Image src={`${BASE_URL}/${obj}`} width={100} height={100} alt="" />
+          <Image
+            src={`${BASE_URL}/${obj}`}
+            loading="lazy"
+            width={70}
+            height={70}
+            alt=""
+            className="cursor-pointer"
+            onClick={setIndexBox ? () => setIndexBox(index) : undefined}
+          />
         )
       );
     }

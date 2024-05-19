@@ -4,10 +4,7 @@ import {
   BsAsterisk,
   BsBandaid,
   BsBasket,
-  BsBuildingAdd,
-  BsBuildingDash,
   BsHouseDoor,
-  BsLamp,
   BsPeople,
 } from "react-icons/bs";
 const createUrl = (path: string) => `/admin${path}`;
@@ -58,6 +55,12 @@ const ListMenu: MenuTypes[] = [
         href: createUrl("/obat/masuk"),
       },
     ],
+  },
+
+  {
+    name: "Gallery",
+    href: createUrl("/gallery"),
+    icon: <BsAsterisk />,
   },
 ];
 

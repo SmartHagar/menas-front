@@ -1,5 +1,5 @@
 /** @format */
-import { BsHouseDoorFill, BsLampFill, BsPeopleFill } from "react-icons/bs";
+import { BsHouseDoorFill } from "react-icons/bs";
 const ListMenu = [
   {
     name: "Home",
@@ -13,7 +13,7 @@ const ListMenu = [
     icon: <BsHouseDoorFill />,
   },
   {
-    name: "Struktur Organisasi",
+    name: "Struktur",
     href: "/strukturOrganisasi",
     icon: <BsHouseDoorFill />,
   },

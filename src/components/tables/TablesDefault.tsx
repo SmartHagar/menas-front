@@ -8,7 +8,6 @@ import { useEffect, useState } from "react";
 import {
   BsArrowDownShort,
   BsArrowUpShort,
-  BsFillEmojiSunglassesFill,
   BsFillPencilFill,
   BsFillTrashFill,
 } from "react-icons/bs";
@@ -32,6 +31,7 @@ type Props = {
   pekerjaan?: boolean;
   costume?: any;
   sort?: boolean;
+  setIndexBox?: (data: number) => void;
 };
 
 const TablesDefault = (props: Props) => {
@@ -109,6 +109,7 @@ const TablesDefault = (props: Props) => {
         {props.dataTable &&
           props.dataTable.map((row: any, index) => {
             const { id } = row;
+            const dtIndex = index;
             return (
               <tr key={index}>
                 <td className="px-6 py-4 rounded-l-xl">{showNo(index)}</td>
@@ -116,7 +117,7 @@ const TablesDefault = (props: Props) => {
                 {props.tableBodies.map((column, index) => {
                   return (
                     <td key={index} className={`px-6 py-4 whitespace-nowrap`}>
-                      {getProperty(row, column)}
+                      {getProperty(row, column, dtIndex, props.setIndexBox)}
                     </td>
                   );
                 })}
