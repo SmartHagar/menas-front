@@ -22,14 +22,11 @@ const getProperty = (obj: any, prop: any, index: number, setIndexBox: any) => {
     if (typeof obj === "object") {
       return obj ? obj[last] : "";
     }
-    if (
-      prop === "tgl_masuk" ||
-      prop === "tgl_kadaluarsa" ||
-      prop === "tgl_resep" ||
-      prop === "tgl_lahir"
-    ) {
+    const date = ["tgl_masuk", "tgl_kadaluarsa", "tgl_resep", "tgl_lahir"];
+    if (date.includes(prop)) {
       return moment(obj).format("DD/MM/YYYY");
     }
+
     if (prop === "gambar" || prop === "foto" || prop === "picture") {
       return (
         obj && (

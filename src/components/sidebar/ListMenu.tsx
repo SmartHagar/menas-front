@@ -67,6 +67,27 @@ const ListMenu: MenuTypes[] = [
     href: createUrl("/gallery"),
     icon: <BsAsterisk />,
   },
+  {
+    name: "Laporan",
+    icon: <BsBandaid />,
+    slug: "laporan",
+    subMenus: [
+      {
+        name: "Obat Masuk",
+        href: createUrl("/laporan/masuk"),
+      },
+
+      {
+        name: "Obat Keluar",
+        href: createUrl("/laporan/keluar"),
+      },
+
+      {
+        name: "Stok Obat",
+        href: createUrl("/laporan/stok"),
+      },
+    ],
+  },
 ];
 
 const petugasMenu: MenuTypes[] = [
