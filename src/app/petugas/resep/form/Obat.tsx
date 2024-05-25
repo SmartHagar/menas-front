@@ -8,7 +8,7 @@ import TablesDefault from "@/components/tables/TablesDefault";
 import useObatMasuk from "@/stores/crud/ObatMasuk";
 import hitungStok from "@/utils/HitungStokObat";
 import { useRouter, useSearchParams } from "next/navigation";
-import React, { FC, useCallback, useEffect, useState } from "react";
+import { FC, useCallback, useEffect, useState } from "react";
 
 type Props = {
   register: any;
@@ -141,8 +141,6 @@ const Obat: FC<Props> = ({ register, watch, setObatCek, obatCek }) => {
               placeholder="Cari Obat"
               onChange={handleSearch}
               addClass="mt-4 mx-2"
-              search={search}
-              setSearch={setSearch}
             />
           </div>
           <div className="">

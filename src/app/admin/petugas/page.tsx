@@ -1,6 +1,6 @@
 /** @format */
 "use client";
-import React, { useState } from "react";
+import { useState } from "react";
 
 import ShowData from "./ShowData";
 import Form from "./form/Form";
@@ -71,8 +71,6 @@ const Petugas = () => {
         <InputTextSearch
           placeholder="Cari Petugas"
           onChange={(e) => setSearch(e)}
-          search={search}
-          setSearch={setSearch}
         />
       </div>
 

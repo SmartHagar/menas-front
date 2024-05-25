@@ -1,6 +1,6 @@
 /** @format */
 "use client";
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import ShowData from "./ShowData";
 import InputTextSearch from "@/components/input/InputTextSearch";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -45,12 +45,7 @@ const Tentang = (props: Props) => {
         <h2 className="text-2xl font-bold">PUSKESMAS HOM-HOM</h2>
       </div>
       <div>
-        <InputTextSearch
-          placeholder="Cari Resep"
-          onChange={handleSearch}
-          setSearch={setSearch}
-          search={search}
-        />
+        <InputTextSearch placeholder="Cari Resep" onChange={handleSearch} />
       </div>
       <ShowData />
     </div>

@@ -1,6 +1,6 @@
 /** @format */
 "use client";
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import ShowData from "./ShowData";
 import ModalDelete from "@/components/modal/ModalDelete";
@@ -87,12 +87,7 @@ const Resep = () => {
             <BtnDefault onClick={handleTambah}>Tambah Data</BtnDefault>
           </div>
         </div>
-        <InputTextSearch
-          placeholder="Cari Resep"
-          onChange={handleSearch}
-          search={search}
-          setSearch={setSearch}
-        />
+        <InputTextSearch placeholder="Cari Resep" onChange={handleSearch} />
       </div>
 
       <ShowData setDelete={setDelete} setEdit={setEdit} />

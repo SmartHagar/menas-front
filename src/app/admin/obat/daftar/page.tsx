@@ -1,6 +1,6 @@
 /** @format */
 "use client";
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import ShowData from "./ShowData";
 import Form from "./form/Form";
@@ -97,12 +97,7 @@ const Obat = () => {
             <BtnDefault onClick={handleTambah}>Tambah Data</BtnDefault>
           </div>
         </div>
-        <InputTextSearch
-          placeholder="Cari Obat"
-          onChange={handleSearch}
-          search={search}
-          setSearch={setSearch}
-        />
+        <InputTextSearch placeholder="Cari Obat" onChange={handleSearch} />
       </div>
 
       <ShowData setDelete={setDelete} setEdit={setEdit} />
