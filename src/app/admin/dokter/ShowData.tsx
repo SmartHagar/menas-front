@@ -5,7 +5,7 @@ import PaginationDefault from "@/components/pagination/PaginationDefault";
 import TablesDefault from "@/components/tables/TablesDefault";
 import useDokter from "@/stores/crud/Dokter";
 import { useSearchParams } from "next/navigation";
-import React, { FC, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 
 type DeleteProps = {
   id?: number | string;
@@ -53,8 +53,8 @@ const ShowData: FC<Props> = ({ setDelete, setEdit, search }) => {
   }, [search, sortby, order]);
 
   // table
-  const headTable = ["No", "Nama Dokter", "Aksi"];
-  const tableBodies = ["nm_dokter"];
+  const headTable = ["No", "Nama Dokter", "Spesialis", "Aksi"];
+  const tableBodies = ["nm_dokter", "spesialis"];
   return (
     <div className="flex-1 flex-col max-w-full h-full overflow-auto">
       {isLoading ? (

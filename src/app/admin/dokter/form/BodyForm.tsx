@@ -1,7 +1,8 @@
 /** @format */
 "use client";
 import InputTextDefault from "@/components/input/InputTextDefault";
-import React, { FC } from "react";
+import { SelectDefault } from "@/components/select/SelectDefault";
+import { FC } from "react";
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -33,6 +34,19 @@ const BodyForm: FC<Props> = ({
         required
         minLength={2}
         errors={errors.nm_dokter}
+        addClass="col-span-4"
+      />
+      <SelectDefault
+        label="Spesialis"
+        defaultOption="Pilih Spesialis"
+        register={register}
+        errors={errors}
+        name="spesialis"
+        options={[
+          { value: "Umum", label: "Umum" },
+          { value: "Gigi", label: "Gigi" },
+          { value: "Penyakit Dalam", label: "Penyakit Dalam" },
+        ]}
         addClass="col-span-4"
       />
     </>

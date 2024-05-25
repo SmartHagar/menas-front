@@ -18,6 +18,7 @@ type Props = {
 type Inputs = {
   id: number | string;
   nm_dokter: string;
+  spesialis: string;
 };
 
 const Form = ({ showModal, setShowModal, dtEdit }: Props) => {
@@ -37,6 +38,7 @@ const Form = ({ showModal, setShowModal, dtEdit }: Props) => {
   const resetForm = () => {
     setValue("id", "");
     setValue("nm_dokter", "");
+    setValue("spesialis", "");
   };
 
   // data edit
@@ -44,6 +46,7 @@ const Form = ({ showModal, setShowModal, dtEdit }: Props) => {
     if (dtEdit) {
       setValue("id", dtEdit.id);
       setValue("nm_dokter", dtEdit.nm_dokter);
+      setValue("spesialis", dtEdit.spesialis);
     } else {
       resetForm();
     }
