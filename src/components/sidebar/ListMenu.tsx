@@ -33,6 +33,11 @@ const ListMenu: MenuTypes[] = [
     href: createUrl("/dokter"),
     icon: <BsAsterisk />,
   },
+  {
+    name: "Jadwal Dokter",
+    href: createUrl("/jadwal"),
+    icon: <BsAsterisk />,
+  },
 
   {
     name: "Petugas",
