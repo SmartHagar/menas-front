@@ -1,8 +1,5 @@
 /** @format */
 
-import { Button } from "flowbite-react";
-import Image from "next/image";
-
 type Props = {};
 
 const Dashboard = (props: Props) => {

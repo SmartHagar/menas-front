@@ -1,5 +1,5 @@
 /** @format */
-
+"use client";
 import Image from "next/image";
 
 type Props = {};
@@ -17,6 +17,7 @@ const Tentang = (props: Props) => {
         width={300}
         height={300}
         className="mx-auto"
+        priority
       />
     </div>
   );

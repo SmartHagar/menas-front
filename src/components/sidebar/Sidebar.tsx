@@ -1,6 +1,6 @@
 /** @format */
 "use client";
-import React, { FC, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import ListMenu, { petugasMenu } from "./ListMenu";
 import Link from "next/link";
 import { BsXLg } from "react-icons/bs";
@@ -8,8 +8,6 @@ import { usePathname, useRouter } from "next/navigation";
 import BtnDefault from "../button/BtnDefault";
 import useLogout from "@/stores/auth/logout";
 import MenuTypes from "@/types/MenuTypes";
-import Cookies from "js-cookie";
-import Image from "next/image";
 import SubMenu from "./SubMenu";
 import LoadingSpiner from "../loading/LoadingSpiner";
 import handleLogout from "@/app/(auth)/logout/logout";
@@ -110,9 +108,9 @@ const Sidebar: FC<Props> = ({ type = "admin" }) => {
           >
             <BsXLg />
           </div>
-          <div className="relative h-full sidebar w-full">
+          <div className="flex flex-col gap-4 h-full sidebar w-full overflow-hidden">
             <div className="h-24 sidebar"></div>
-            <ul className="space-y-2 font-medium w-full">
+            <ul className="space-y-2 grow w-full h-full overflow-auto">
               {menus &&
                 menus.map((menu, index) => {
                   const isActive = pathname === menu.href;
@@ -146,7 +144,7 @@ const Sidebar: FC<Props> = ({ type = "admin" }) => {
             {loadLogout ? (
               <LoadingSpiner />
             ) : (
-              <div className="absolute bottom-4 flex justify-center left-0 right-0">
+              <div className="flex justify-center">
                 <BtnDefault
                   addClass="bg-secondary text-color-1"
                   onClick={() =>

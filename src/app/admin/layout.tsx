@@ -16,7 +16,7 @@ const layout = (props: Props) => {
       <div className="flex sm:ml-64 py-2 items-center justify-center shadow-md backdrop-blur-sm">
         <HeaderComp />
       </div>
-      <div className="sm:w-64 shrink-0">
+      <div className="sm:w-64 shrink-0 fixed left-0 top-0 bottom-0">
         <Sidebar />
       </div>
       <div className="h-full flex ml-64 pb-16 px-4 mt-4">{props.children}</div>

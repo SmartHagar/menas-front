@@ -4,15 +4,18 @@ import { useCallback, useEffect, useState } from "react";
 import ShowData from "./ShowData";
 import InputTextSearch from "@/components/input/InputTextSearch";
 import { useRouter, useSearchParams } from "next/navigation";
+import useObatApi from "@/stores/api/Obat";
+import GrafikStock from "@/components/grafik/GrafikStock";
 
 type Props = {};
 
-const Tentang = (props: Props) => {
+const Obat = (props: Props) => {
   const [search, setSearch] = useState("");
 
   // router
   const router = useRouter();
-
+  // store
+  const { setStock, dtStock } = useObatApi();
   // search params
   const searchParams = useSearchParams();
   const sortby = searchParams.get("sortby") || "";
@@ -24,6 +27,19 @@ const Tentang = (props: Props) => {
 
     return () => {};
   }, [getSearch]);
+
+  // fetch data
+  const fetchData = useCallback(async () => {
+    try {
+      await setStock({});
+    } catch (error) {
+      console.error("Failed to fetch stock data:", error);
+    }
+  }, [setStock]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   const handleSearch = useCallback(
     (cari: string) => {
@@ -40,6 +56,10 @@ const Tentang = (props: Props) => {
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-screen-xl mx-auto">
+      <div>
+        <h2 className="text-2xl font-bold text-center">Grafik Stok Obat</h2>
+        {dtStock && <GrafikStock dtStock={dtStock} />}
+      </div>
       <div className="flex flex-col items-center">
         <h2 className="text-2xl font-bold">DAFTAR STOK OBAT</h2>
         <h2 className="text-2xl font-bold">PUSKESMAS HOM-HOM</h2>
@@ -52,4 +72,4 @@ const Tentang = (props: Props) => {
   );
 };
 
-export default Tentang;
+export default Obat;

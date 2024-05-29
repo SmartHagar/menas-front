@@ -12,6 +12,7 @@ type Props = {
 
 type Store = {
   dtObat: any;
+  dtStock: any;
   setObat: ({ page, limit, search }: Props) => Promise<{
     status: string;
     data?: {};
@@ -22,11 +23,17 @@ type Store = {
     data?: {};
     error?: {};
   }>;
+  setStock: ({}: Props) => Promise<{
+    status: string;
+    data?: {};
+    error?: {};
+  }>;
 };
 
 const useObatApi = create(
   devtools<Store>((set, get) => ({
     dtObat: [],
+    dtStock: [],
     setObat: async ({ page = 1, limit = 10, search }) => {
       try {
         const response = await api({
@@ -60,6 +67,24 @@ const useObatApi = create(
           },
         });
         set((state) => ({ ...state, dtObat: response.data }));
+        return {
+          status: "berhasil",
+          data: response.data,
+        };
+      } catch (error: any) {
+        return {
+          status: "error",
+          error: error.response.data,
+        };
+      }
+    },
+    setStock: async ({}) => {
+      try {
+        const response = await api({
+          method: "get",
+          url: `/obat/stock`,
+        });
+        set((state) => ({ ...state, dtStock: response.data.data }));
         return {
           status: "berhasil",
           data: response.data,
