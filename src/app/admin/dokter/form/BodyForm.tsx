@@ -39,8 +39,9 @@ const BodyForm: FC<Props> = ({
       <SelectDefault
         label="Spesialis"
         defaultOption="Pilih Spesialis"
+        required
         register={register}
-        errors={errors}
+        errors={errors.spesialis}
         name="spesialis"
         options={[
           { value: "Umum", label: "Umum" },

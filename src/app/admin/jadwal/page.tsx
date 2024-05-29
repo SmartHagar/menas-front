@@ -11,6 +11,7 @@ import BtnDefault from "@/components/button/BtnDefault";
 import { useForm } from "react-hook-form";
 import Cari from "@/components/bar/Cari";
 import useJadwal from "@/stores/crud/Jadwal";
+import InputTextSearch from "@/components/input/InputTextSearch";
 
 // type setDelete
 type Delete = {
@@ -82,6 +83,10 @@ const Jadwal = () => {
             <BtnDefault onClick={handleTambah}>Tambah Data</BtnDefault>
           </div>
         </div>
+        <InputTextSearch
+          placeholder="Cari Dokter"
+          onChange={(cari) => setValue("cari", cari)}
+        />
       </div>
 
       <ShowData setDelete={setDelete} setEdit={setEdit} search={cariWatch} />

@@ -18,8 +18,18 @@ const ListMenu = [
     icon: <BsHouseDoorFill />,
   },
   {
+    name: "Dokter",
+    href: "/dokter",
+    icon: <BsHouseDoorFill />,
+  },
+  {
     name: "Obat",
     href: "/obat",
+    icon: <BsHouseDoorFill />,
+  },
+  {
+    name: "Galeri",
+    href: "/galeri",
     icon: <BsHouseDoorFill />,
   },
 ];

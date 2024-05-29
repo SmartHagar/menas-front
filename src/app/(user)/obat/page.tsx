@@ -65,7 +65,7 @@ const Obat = (props: Props) => {
         <h2 className="text-2xl font-bold">PUSKESMAS HOM-HOM</h2>
       </div>
       <div>
-        <InputTextSearch placeholder="Cari Resep" onChange={handleSearch} />
+        <InputTextSearch placeholder="Cari Obat" onChange={handleSearch} />
       </div>
       <ShowData />
     </div>
