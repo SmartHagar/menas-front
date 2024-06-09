@@ -1,7 +1,6 @@
 /** @format */
 "use client";
 import InputTextDefault from "@/components/input/InputTextDefault";
-import ModalDefault from "@/components/modal/ModalDefault";
 import toastShow from "@/utils/toast-show";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -108,6 +107,7 @@ const Form = ({ dtEdit }: Props) => {
     console.log({ row });
     // return;
     // jika dtEdit tidak kosong maka update
+    // return;
     if (dtEdit) {
       const { data } = await updateData(dtEdit.id, row);
       toastShow({
