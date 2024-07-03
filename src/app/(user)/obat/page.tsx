@@ -1,8 +1,6 @@
 /** @format */
 "use client";
 import { useCallback, useEffect, useState } from "react";
-import ShowData from "./ShowData";
-import InputTextSearch from "@/components/input/InputTextSearch";
 import { useRouter, useSearchParams } from "next/navigation";
 import useObatApi from "@/stores/api/Obat";
 import GrafikStock from "@/components/grafik/GrafikStock";
@@ -55,19 +53,19 @@ const Obat = (props: Props) => {
   }, [handleSearch, search]);
 
   return (
-    <div className="flex flex-col gap-4 w-full max-w-screen-xl mx-auto">
+    <div className="flex flex-col gap-4 w-full max-w-screen-xl mx-auto mb-10">
       <div>
         <h2 className="text-2xl font-bold text-center">Grafik Stok Obat</h2>
         {dtStock && <GrafikStock dtStock={dtStock} />}
       </div>
-      <div className="flex flex-col items-center">
+      {/* <div className="flex flex-col items-center">
         <h2 className="text-2xl font-bold">DAFTAR STOK OBAT</h2>
         <h2 className="text-2xl font-bold">PUSKESMAS HOM-HOM</h2>
       </div>
       <div>
         <InputTextSearch placeholder="Cari Obat" onChange={handleSearch} />
       </div>
-      <ShowData />
+      <ShowData /> */}
     </div>
   );
 };

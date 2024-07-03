@@ -26,6 +26,7 @@ type Inputs = {
   diagnosa: string;
   obat: { obat_masuk_id: number | string; jumlah: number | string }[];
   cek: any;
+  aturan_obat: string;
 };
 
 const Form = ({ dtEdit }: Props) => {
@@ -64,6 +65,7 @@ const Form = ({ dtEdit }: Props) => {
     setValue("tgl_resep", nowDate);
     setValue("dokter_id", "");
     setValue("diagnosa", "");
+    setValue("aturan_obat", "");
   };
   // data edit
   useEffect(() => {
@@ -75,6 +77,8 @@ const Form = ({ dtEdit }: Props) => {
       setTgl_resep(dtEdit.tgl_resep && new Date(dtEdit.tgl_resep));
       setValue("dokter_id", dtEdit.dokter_id);
       setValue("diagnosa", dtEdit.diagnosa);
+      setValue("aturan_obat", dtEdit.aturan_obat);
+
       const obat =
         dtEdit?.obat_keluar &&
         dtEdit.obat_keluar.map((item: any) => {
@@ -105,7 +109,6 @@ const Form = ({ dtEdit }: Props) => {
       )
     );
     console.log({ row });
-    // return;
     // jika dtEdit tidak kosong maka update
     // return;
     if (dtEdit) {

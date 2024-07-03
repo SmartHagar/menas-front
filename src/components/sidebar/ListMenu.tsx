@@ -17,7 +17,7 @@ const ListMenu: MenuTypes[] = [
   },
 
   {
-    name: "Jenis",
+    name: "Kategori",
     href: createUrl("/jenis"),
     icon: <BsBasket />,
   },

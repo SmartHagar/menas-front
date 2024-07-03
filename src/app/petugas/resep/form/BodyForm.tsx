@@ -1,9 +1,8 @@
 /** @format */
 "use client";
 import InputTextDefault from "@/components/input/InputTextDefault";
-import React, { FC, useEffect, useState } from "react";
+import { FC, useEffect } from "react";
 import "react-datepicker/dist/react-datepicker.css";
-import InputRadio from "@/components/input/InputRadio";
 import InputDate from "@/components/input/InputDate";
 import SelectFromDb from "@/components/select/SelectFromDB";
 import usePasienApi from "@/stores/api/Pasien";
@@ -83,6 +82,7 @@ const BodyForm: FC<Props> = ({
           addClass="col-span-4 lg:col-span-2"
         />
       )}
+
       {dtPasien?.data && (
         <SelectFromDb
           label="Pasien"
@@ -104,6 +104,16 @@ const BodyForm: FC<Props> = ({
         required
         minLength={3}
         errors={errors.diagnosa}
+        addClass="col-span-4"
+      />
+
+      <InputTextDefault
+        label="Aturan Obat"
+        name="aturan_obat"
+        register={register}
+        required
+        minLength={3}
+        errors={errors.aturan_obat}
         addClass="col-span-4"
       />
     </>
