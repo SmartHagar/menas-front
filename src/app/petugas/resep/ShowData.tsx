@@ -5,9 +5,9 @@ import PaginationDefault from "@/components/pagination/PaginationDefault";
 import TablesDefault from "@/components/tables/TablesDefault";
 import useResep from "@/stores/crud/Resep";
 import { useSearchParams } from "next/navigation";
-import React, { FC, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import CetakResep from "./CetakResep";
-import { BsInfoCircle, BsInfoCircleFill, BsPrinterFill } from "react-icons/bs";
+import { BsInfoCircleFill } from "react-icons/bs";
 import ModalDefault from "@/components/modal/ModalDefault";
 
 type DeleteProps = {
@@ -65,6 +65,7 @@ const ShowData: FC<Props> = ({ setDelete, setEdit }) => {
     "Dokter",
     "Pasien",
     "Diagnosa",
+    "Aturan",
     "Petugas",
     "Aksi",
   ];
@@ -74,6 +75,7 @@ const ShowData: FC<Props> = ({ setDelete, setEdit }) => {
     "dokter.nm_dokter",
     "pasien.nm_pasien",
     "diagnosa",
+    "aturan_obat",
     "petugas.nm_petugas",
   ];
 

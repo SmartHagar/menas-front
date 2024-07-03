@@ -2,7 +2,7 @@
 
 import BtnDefault from "@/components/button/BtnDefault";
 import Image from "next/image";
-import React, { FC, Ref } from "react";
+import React, { FC } from "react";
 import { BsPrinterFill } from "react-icons/bs";
 import ReactToPrint from "react-to-print";
 
@@ -90,6 +90,10 @@ const CetakResep: FC<Props> = ({ data }) => {
               <tr>
                 <td className="">Jenis Kelamin</td>
                 <td className=" px-4">: {data.pasien.jenkel}</td>
+              </tr>
+              <tr>
+                <td className="">Aturan</td>
+                <td className=" px-4">: {data.aturan_obat}</td>
               </tr>
               <tr>
                 <td className="">Diagnosa</td>

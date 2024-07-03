@@ -7,6 +7,7 @@ import InputDate from "@/components/input/InputDate";
 import SelectFromDb from "@/components/select/SelectFromDB";
 import usePasienApi from "@/stores/api/Pasien";
 import useDokterApi from "@/stores/api/Dokter";
+import InputTextArea from "@/components/input/InputTextArea";
 
 type Props = {
   register: any;
@@ -107,7 +108,7 @@ const BodyForm: FC<Props> = ({
         addClass="col-span-4"
       />
 
-      <InputTextDefault
+      <InputTextArea
         label="Aturan Obat"
         name="aturan_obat"
         register={register}
